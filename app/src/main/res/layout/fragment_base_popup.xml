@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/custom_radius_dialog_fragment"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="@dimen/button_size_35"
+        android:layout_height="@dimen/button_size_35"
+        android:id="@+id/image"
+        android:layout_marginTop="@dimen/spacing_30"
+        android:src="@drawable/ic_verify_sms"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_check_your_email"
+        android:fontFamily="@font/raleway_bold"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:textColor="@color/black_1"
+        android:textSize="@dimen/text_size_13"
+        android:id="@+id/tv_title"
+        android:textAlignment="center"
+        android:ellipsize="end"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_content"
+        android:textAlignment="center"
+        android:layout_marginStart="@dimen/spacing_20"
+        android:layout_marginEnd="@dimen/spacing_20"
+        android:layout_marginBottom="@dimen/spacing_30"
+        android:layout_marginTop="@dimen/spacing_10"
+        style="@style/TextLayoutDescriptionStyle"
+        android:text="@string/text_description_popup_reset_password"
+        />
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_title_subtotal"
+            style="@style/TextLayoutBasicStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_13"
+            android:text="@string/text_subtotal"
+            android:textColor="@color/grey_1"
+            android:textSize="@dimen/text_size_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_subtotal"
+            style="@style/TextLayoutDescriptionStyleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$753.95"
+            android:textColor="@color/black_1"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/text_size_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_title_subtotal"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_5">
+
+        <TextView
+            android:id="@+id/tv_title_delivery"
+            style="@style/TextLayoutBasicStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_13"
+            android:text="@string/text_delivery"
+            android:textColor="@color/grey_1"
+            android:textSize="@dimen/text_size_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_delivery"
+            style="@style/TextLayoutDescriptionStyleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$53.95"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black_1"
+            android:textSize="@dimen/text_size_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_title_delivery"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginStart="@dimen/spacing_13"
+        android:layout_marginTop="@dimen/spacing_13"
+        android:layout_marginEnd="@dimen/spacing_13"
+        android:background="@drawable/view_break_line" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_5">
+
+        <TextView
+            android:id="@+id/tv_title_total_cost"
+            style="@style/TextLayoutBasicStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_13"
+            android:text="@string/text_delivery"
+            android:textSize="@dimen/text_size_13"
+            android:textColor="@color/black_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_total_cost"
+            style="@style/TextLayoutDescriptionStyleMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="$814.15"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/text_size_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/main_color"
+            app:layout_constraintStart_toEndOf="@+id/tv_title_total_cost"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/spacing_30"
+        android:layout_marginBottom="@dimen/spacing_30"
+        android:text="@string/text_checkout"
+        android:id="@+id/bt_check_out"
+        style="@style/ButtonStyleMain"
+        />
+
+</LinearLayout>

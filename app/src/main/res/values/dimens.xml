@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_splash_width">@dimen/_120sdp</dimen>
+    <dimen name="logo_splash_height">@dimen/_100sdp</dimen>
+    <dimen name="spacing_3">@dimen/_3sdp</dimen>
+    <dimen name="spacing_5">@dimen/_5sdp</dimen>
+    <dimen name="spacing_7">@dimen/_7sdp</dimen>
+    <dimen name="spacing_10">@dimen/_10sdp</dimen>
+    <dimen name="spacing_12">@dimen/_12sdp</dimen>
+    <dimen name="spacing_13">@dimen/_13sdp</dimen>
+    <dimen name="spacing_15">@dimen/_15sdp</dimen>
+    <dimen name="spacing_20">@dimen/_20sdp</dimen>
+    <dimen name="spacing_30">@dimen/_30sdp</dimen>
+    <dimen name="spacing_40">@dimen/_40sdp</dimen>
+    <dimen name="spacing_50">@dimen/_50sdp</dimen>
+    <dimen name="spacing_60">@dimen/_60sdp</dimen>
+    <dimen name="spacing_70">@dimen/_70sdp</dimen>
+    <dimen name="spacing_80">@dimen/_80sdp</dimen>
+    <dimen name="spacing_85">@dimen/_85sdp</dimen>
+    <dimen name="spacing_90">@dimen/_90sdp</dimen>
+    <dimen name="spacing_100">@dimen/_100sdp</dimen>
+    <dimen name="spacing_150">@dimen/_150sdp</dimen>
+    <dimen name="spacing_200">@dimen/_200sdp</dimen>
+    <dimen name="spacing_250">@dimen/_250sdp</dimen>
+
+    <!--   Width/Height-->
+    <dimen name="button_size_12">@dimen/_12sdp</dimen>
+    <dimen name="button_size_14">@dimen/_14sdp</dimen>
+    <dimen name="button_size_16">@dimen/_16sdp</dimen>
+    <dimen name="button_size_19">@dimen/_19sdp</dimen>
+    <dimen name="button_size_20">@dimen/_20sdp</dimen>
+    <dimen name="button_size_25">@dimen/_25sdp</dimen>
+    <dimen name="button_size_30">@dimen/_30sdp</dimen>
+    <dimen name="button_size_32">@dimen/_32sdp</dimen>
+    <dimen name="button_height">@dimen/_37sdp</dimen>
+    <dimen name="button_size_35">@dimen/_35sdp</dimen>
+    <dimen name="button_size_40">@dimen/_40sdp</dimen>
+    <dimen name="button_size_60">@dimen/_60sdp</dimen>
+    <dimen name="button_size_70">@dimen/_70sdp</dimen>
+    <dimen name="button_size_80">@dimen/_80sdp</dimen>
+    <dimen name="button_size_100">@dimen/_100sdp</dimen>
+
+    <!--    Radius-->
+    <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_12">12dp</dimen>
+    <dimen name="radius_13">13dp</dimen>
+    <dimen name="radius_16">16dp</dimen>
+    <dimen name="radius_25">25dp</dimen>
+    <dimen name="radius_32">32dp</dimen>
+
+    <!--    Text Size-->
+    <dimen name="text_size_10">@dimen/_10ssp</dimen>
+    <dimen name="text_size_12">@dimen/_12ssp</dimen>
+    <dimen name="text_size_13">@dimen/_13ssp</dimen>
+    <dimen name="text_size_14">@dimen/_14ssp</dimen>
+    <dimen name="text_size_16">@dimen/_16ssp</dimen>
+    <dimen name="text_size_18">@dimen/_18ssp</dimen>
+    <dimen name="text_size_20">@dimen/_20ssp</dimen>
+    <dimen name="text_size_25">@dimen/_25ssp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

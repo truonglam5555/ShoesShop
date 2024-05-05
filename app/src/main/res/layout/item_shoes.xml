@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@drawable/custom_bg_item_shoes">
+
+    <ImageView
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_155sdp" />
+
+    <ImageView
+        android:id="@+id/ic_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:src="@drawable/ic_fav" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:src="@drawable/img_shoes" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/poppin_medium"
+        android:text="BEST SELLER"
+        android:textColor="@color/blue_200"
+        android:textSize="@dimen/_10sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_35sdp"
+        android:fontFamily="@font/raleway_medium"
+        android:text="Nike Air Max"
+        android:textColor="#2B2B2B"
+        android:textSize="@dimen/_13sdp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center|bottom"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:fontFamily="@font/poppin_medium"
+        android:text="$47.7"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13sdp" />
+
+    <ImageView
+        android:id="@+id/ic_add_cart"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:layout_margin="@dimen/_3sdp"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_add_cart" />
+</FrameLayout>

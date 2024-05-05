@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/ic_user"
+        android:title="@string/tv_profile" />
+    <item
+        android:id="@+id/my_card"
+        android:icon="@drawable/ic_cart"
+        android:title="@string/tv_my_cart" />
+    <item
+        android:id="@+id/favorite"
+        android:icon="@drawable/ic_love"
+        android:title="@string/tv_favorite" />
+    <item
+        android:id="@+id/order"
+        android:icon="@drawable/ic_orders"
+        android:title="@string/tv_orders" />
+    <item
+        android:id="@+id/notify"
+        android:icon="@drawable/ic_notifi"
+        android:title="@string/tv_notification" />
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/tv_setting" />
+
+    <item
+        android:id="@+id/log_out_group"
+        tools:ignore="MenuTitle">
+        <menu>
+
+            <item
+                android:id="@+id/sign_out"
+                android:icon="@drawable/ic_signout"
+                android:title="@string/tv_sign_out" />
+
+        </menu>
+
+    </item>
+
+
+</menu>

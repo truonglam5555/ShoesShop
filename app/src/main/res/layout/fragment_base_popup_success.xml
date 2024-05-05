@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/custom_radius_dialog_fragment"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="@dimen/button_size_100"
+        android:layout_height="@dimen/button_size_100"
+        android:id="@+id/image"
+        android:layout_marginTop="@dimen/spacing_30"
+        android:src="@drawable/img_success"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_your_payment_is_successful"
+        android:fontFamily="@font/raleway_semibold"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:textColor="@color/black_1"
+        android:layout_marginStart="@dimen/spacing_60"
+        android:layout_marginEnd="@dimen/spacing_60"
+        android:textSize="@dimen/text_size_16"
+        android:id="@+id/tv_title"
+        android:textAlignment="center"
+        android:ellipsize="end"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        style="@style/ButtonStyleMain"
+        android:id="@+id/bt_submit"
+        android:text="@string/text_back_to_shopping"
+        android:layout_marginStart="@dimen/spacing_60"
+        android:layout_marginBottom="@dimen/spacing_30"
+        android:layout_marginEnd="@dimen/spacing_60"
+        android:layout_marginTop="@dimen/spacing_20"
+        />
+</LinearLayout>

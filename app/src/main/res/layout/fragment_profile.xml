@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".features.main.home.HomeFragment">
+
+    <include layout="@layout/layout_header"
+        android:id="@+id/layout_header"
+        />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/spacing_40"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/button_size_60"
+                    android:layout_height="@dimen/button_size_60"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/img_placeholder"
+                    />
+                <ImageView
+                    android:layout_width="@dimen/button_size_16"
+                    android:layout_height="@dimen/button_size_16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:src="@drawable/ic_edit_circle"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/layout_input_common"
+                android:id="@+id/layout_your_name"
+                />
+            <include layout="@layout/layout_email"
+                android:id="@+id/layout_email"
+                />
+            <include layout="@layout/layout_password"
+                android:id="@+id/layout_password"
+                />
+            <TextView
+                android:id="@+id/tv_forgot_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginTop="@dimen/spacing_10"
+                android:layout_marginEnd="@dimen/spacing_13"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_recovery_password"
+                android:textAlignment="textEnd"
+                android:textColor="@color/grey_1"
+                android:layout_marginBottom="@dimen/spacing_40"
+                android:textSize="@dimen/text_size_10" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_login"
+                style="@style/ButtonStyleMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_10"
+                android:paddingStart="@dimen/spacing_10"
+                android:paddingTop="@dimen/spacing_10"
+                android:paddingEnd="@dimen/spacing_10"
+                android:paddingBottom="@dimen/spacing_15"
+                android:text="@string/text_save_now" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextTitleList"
+        android:layout_marginTop="@dimen/spacing_13"
+        android:layout_marginStart="@dimen/spacing_13"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="First Name"
+        android:id="@+id/tv_title"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_13"
+        android:layout_marginEnd="@dimen/spacing_13"
+        android:layout_marginTop="@dimen/spacing_13"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:background="@drawable/background_base_edittext"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_name"
+            android:padding="@dimen/spacing_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Emmanuel"
+            />
+        <ImageView
+            android:layout_width="@dimen/button_size_12"
+            android:layout_height="@dimen/button_size_12"
+            android:id="@+id/img_tick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="@dimen/spacing_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_tick"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

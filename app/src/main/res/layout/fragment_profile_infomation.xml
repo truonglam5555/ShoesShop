@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_header"
+        layout="@layout/layout_header" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/button_size_60"
+                android:layout_height="@dimen/button_size_60"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_40"
+                android:src="@drawable/img_placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Emmanuel Oyiboke"
+                android:layout_marginTop="@dimen/spacing_13"
+                style="@style/TextLayoutBasicStyle"
+                android:textSize="@dimen/text_size_16"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginEnd="@dimen/spacing_13"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginEnd="@dimen/spacing_13"
+                android:textColor="@color/main_color"
+                android:layout_marginTop="@dimen/spacing_5"
+                android:textSize="@dimen/text_size_10"
+                android:text="@string/text_change_profile_picture"
+                />
+
+            <include layout="@layout/layout_view_profile_info"
+                android:id="@+id/layout_first_name"
+                />
+            <include layout="@layout/layout_view_profile_info"
+                android:id="@+id/layout_last_name"
+                />
+            <include layout="@layout/layout_view_profile_info"
+                android:id="@+id/layout_location"
+                />
+            <include layout="@layout/layout_view_profile_info"
+                android:id="@+id/layout_phone"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="@dimen/button_size_19"
+        android:height="@dimen/button_size_19"
+        android:drawable="@drawable/ic_person_unchecked" />
+</layer-list>

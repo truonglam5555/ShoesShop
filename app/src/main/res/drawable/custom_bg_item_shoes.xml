@@ -1,0 +1,6 @@
+<!-- tab_layout_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/white" /> <!-- Màu nền của tab -->
+    <corners android:radius="@dimen/_16sdp" /> <!-- Bán kính của góc bo -->
+</shape>

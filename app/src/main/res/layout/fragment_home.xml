@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_view_color"
+    android:orientation="vertical"
+    tools:context=".features.main.home.HomeFragment">
+
+    <include
+        android:id="@+id/layout_header"
+        layout="@layout/layout_header_2" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:paddingTop="@dimen/spacing_5"
+        android:paddingBottom="@dimen/spacing_5">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_13"
+            android:layout_marginEnd="@dimen/spacing_13"
+            android:layout_marginBottom="@dimen/spacing_5"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0.0px"
+            android:elevation="8dp"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/spacing_10"
+            android:paddingBottom="@dimen/spacing_10"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/radius_12"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_control"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/button_size_16"
+                    android:layout_height="@dimen/button_size_16"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/spacing_20"
+                    android:src="@drawable/ic_search" />
+
+                <TextView
+                    style="@style/TextLayoutDescriptionStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_5"
+                    android:fontFamily="@font/poppin_medium"
+                    android:text="@string/text_looking_for_shoes"
+                    android:textAlignment="textStart"
+                    android:textSize="@dimen/text_size_10" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/ic_control"
+            android:layout_width="@dimen/button_size_35"
+            android:layout_height="@dimen/button_size_35"
+            android:layout_marginEnd="@dimen/spacing_13"
+            android:src="@drawable/ic_control"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_85">
+
+            <include
+                android:id="@+id/layout_select_cate"
+                layout="@layout/layout_menu_horizontal" />
+
+            <include
+                android:id="@+id/layout_product"
+                layout="@layout/layout_menu_horizontal" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

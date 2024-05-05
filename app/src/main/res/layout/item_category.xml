@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/card_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="@dimen/spacing_13"
+        android:layout_marginRight="@dimen/spacing_13"
+        android:layout_marginTop="@dimen/spacing_13"
+        android:layout_marginBottom="@dimen/spacing_13"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="@dimen/radius_12"
+        app:cardBackgroundColor="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All Shoes"
+            android:id="@+id/tv_category"
+            android:layout_marginTop="@dimen/spacing_10"
+            android:layout_marginBottom="@dimen/spacing_10"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            style="@style/TextLayoutDescriptionStyle"
+            android:textSize="@dimen/text_size_10"
+            />
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_view_color"
+    android:orientation="vertical"
+    tools:context=".features.main.detail.ProductDetailFragment">
+
+    <LinearLayout
+        android:id="@+id/layout_of_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/layout_header"
+            layout="@layout/layout_header" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_bottom"
+        app:layout_constraintTop_toBottomOf="@id/layout_of_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextLayoutHeadingStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_name"
+                android:text="Nike Air Max 270 Essential"
+                android:textAlignment="textStart" />
+
+            <TextView
+                style="@style/TextLayoutDescriptionStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_5"
+                android:id="@+id/tv_type"
+                android:text="Men's Shoes" />
+
+            <TextView
+                style="@style/TextLayoutHeadingStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$139,39"
+                android:id="@+id/tv_price"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/text_size_18" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_13">
+
+                <ImageView
+                    android:id="@+id/img_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_13"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="@dimen/spacing_13"
+                    android:src="@drawable/_img_shoe_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/spacing_13"
+                    android:layout_marginTop="-50dp"
+                    android:layout_marginEnd="@dimen/spacing_13"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_vector_shoe"
+                    app:layout_constraintTop_toBottomOf="@id/img_product" />
+
+                <ImageView
+                    android:layout_width="@dimen/button_size_32"
+                    android:layout_height="@dimen/button_size_14"
+                    android:src="@drawable/ic_slider_arrow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_product" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/layout_choose_color"
+                layout="@layout/layout_menu_horizontal" />
+
+            <TextView
+                style="@style/TextLayoutDescriptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The Max Air 270 unit delivers unrivaled, all-day comfort. The sleek, running-inspired design roots you to everything Nike........"
+                android:textAlignment="textStart"
+                android:id="@+id/tv_description"
+                android:textSize="@dimen/text_size_12" />
+
+            <TextView
+                style="@style/TextLayoutDescriptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginTop="@dimen/spacing_13"
+                android:layout_marginEnd="@dimen/spacing_13"
+                android:text="@string/text_read_more"
+                android:textAlignment="textEnd"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/text_size_12" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_view_color"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/button_size_40"
+            android:layout_height="@dimen/button_size_40"
+            android:layout_marginStart="@dimen/spacing_40"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:src="@drawable/ic_heart_circle"
+            android:id="@+id/ic_heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_40"
+            android:layout_marginEnd="@dimen/spacing_13"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:background="@drawable/background_button_main_accent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_10"
+            app:layout_constraintStart_toEndOf="@id/ic_heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/camera_ibtn"
+                android:layout_width="@dimen/button_size_16"
+                android:layout_height="@dimen/button_size_16"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_drawer_cart" />
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_10"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:paddingBottom="@dimen/spacing_5"
+                android:text="@string/text_sign_in_with_google"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

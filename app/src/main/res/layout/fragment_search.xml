@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_view_color"
+    tools:context=".features.main.home.SearchFragment">
+
+    <include
+        android:id="@+id/layout_header"
+        layout="@layout/layout_header" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_13"
+        android:layout_marginTop="@dimen/spacing_40"
+        android:layout_marginEnd="@dimen/spacing_13">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_search_view"
+            android:padding="@dimen/spacing_10"
+            app:iconifiedByDefault="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryBackground="@null"
+            app:queryHint="@string/text_search_your_shoes"
+            app:searchIcon="@drawable/custom_size_icon_search" />
+
+        <ImageView
+            android:layout_width="@dimen/button_size_19"
+            android:layout_height="@dimen/button_size_19"
+            android:layout_marginEnd="@dimen/spacing_20"
+            android:src="@drawable/ic_mic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/layout_history_search"
+        layout="@layout/layout_menu_horizontal" />
+
+</LinearLayout>
