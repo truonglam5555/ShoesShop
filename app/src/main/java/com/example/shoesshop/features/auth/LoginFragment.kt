@@ -43,19 +43,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
 
         binding.btLogin.setOnClickListener {
-            val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString());
-            if (user != null && user.pass == binding.layoutPassword.edtPassword.text.toString())
-            {
-                user.id?.let { value ->
-                    MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+            FetchDataFirebase.share.auth.signInWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
+                if (it.user != null)
+                {
+                    val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
+                    user!!.id?.let { value ->
+                        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+                    }
+                    requireActivity().finish()
+                    requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
                 }
-                requireActivity().finish()
-                requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
-
-            }else
-            {
-                Log.d("Login",user.toString())
+            }.addOnFailureListener{
+                Log.d("Login",it.message.toString())
             }
+//            val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString());
+//            if (user != null && user.pass == binding.layoutPassword.edtPassword.text.toString())
+//            {
+//                user.id?.let { value ->
+//                    MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+//                }
+//                requireActivity().finish()
+//                requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
+//
+//            }else
+//            {
+//                Log.d("Login",user.toString())
+//            }
         }
         addProductTest()
     }

@@ -12,7 +12,6 @@ import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
-import com.example.shoesshop.data.gmail.EmailController
 import com.example.shoesshop.databinding.FragmentLoginBinding
 import com.example.shoesshop.databinding.FragmentRegisterBinding
 import com.example.shoesshop.model.CardUser
@@ -48,33 +47,43 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     fun  listenner()
     {
         binding.btLogin.setOnClickListener{
-            if (binding.layoutEmail.edtEmail.text.toString().isNotEmpty()) return@setOnClickListener
-            val item = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
-            if (item == null)
-            {
-                val list = ArrayList<Int>()
-                list.add(1) //  Đọc
-                list.add(0) // Viết
-                list.add(0) // Xoá => tuỳ bác muốn set vị trí
-                val user = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
-                    0,list,"",binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString())
-                FetchDataFirebase.share.addUser(user,object : ActionCallback{
-                    override fun onActionComplete(isSuccess: Boolean) {
-                        if (isSuccess)
-                        {
-                            Toast.makeText(this@RegisterFragment.activity,"Sucesss!",Toast.LENGTH_SHORT).show().let {
-                                EmailController.shared.sendMail("Register Account","Thanks You Register Account!",binding.layoutEmail.edtEmail.text.toString())
-                                findNavController().popBackStack()
+            FetchDataFirebase.share.auth.createUserWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
+                if (it.user !=null)
+                {
+                    val user =  it.user
+                    user?.sendEmailVerification().let {
+                        val list = ArrayList<Int>()
+                        list.add(1) //  Đọc
+                        list.add(0) // Viết
+                        list.add(0) // Xoá => tuỳ bác muốn set vị trí
+                        val user = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
+                            0,list,"",user?.email,binding.layoutPassword.edtPassword.text.toString())
+                        FetchDataFirebase.share.addUser(user,object : ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    Toast.makeText(this@RegisterFragment.activity,"Sucesss!",Toast.LENGTH_SHORT).show().let {
+                                        //EmailController.shared.sendMail("Register Account","Thanks You Register Account!",binding.layoutEmail.edtEmail.text.toString())
+                                        findNavController().popBackStack()
+                                    }
+
+                                }else
+                                {
+                                    Toast.makeText(this@RegisterFragment.activity,"Fail!",Toast.LENGTH_SHORT).show()
+                                }
                             }
-
-                        }else
-                        {
-                            Toast.makeText(this@RegisterFragment.activity,"Fail!",Toast.LENGTH_SHORT).show()
-                        }
+                        })
                     }
-
-                })
+                }
+            }.addOnFailureListener{
+                Toast.makeText(this@RegisterFragment.activity,it.message,Toast.LENGTH_SHORT).show()
             }
+//            if (binding.layoutEmail.edtEmail.text.toString().isNotEmpty()) return@setOnClickListener
+//            val item = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
+//            if (item == null)
+//            {
+////
+//            }
         }
     }
 }

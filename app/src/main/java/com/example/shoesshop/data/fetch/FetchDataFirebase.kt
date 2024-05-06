@@ -7,7 +7,8 @@ import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.BillOder
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.model.Employee
-import com.google.android.gms.tasks.SuccessContinuation
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -22,12 +23,16 @@ class FetchDataFirebase {
     var listProduct : ArrayList<Product> = ArrayList()
     var listBillOder : ArrayList<BillOder> = ArrayList()
     val database = Firebase.database
-    val storage = Firebase.storage
+    private val storage = Firebase.storage
+      val auth: FirebaseAuth
     lateinit var dataUser : DatabaseReference
     lateinit var dataProduct : DatabaseReference
     lateinit var dataBillOder : DatabaseReference
     companion object{
         val share = FetchDataFirebase()
+    }
+    init {
+        auth = Firebase.auth
     }
 
     fun init()
