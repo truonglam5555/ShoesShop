@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.shoesshop.constants.DataShared
 import com.example.shoesshop.data.fetch.FetchDataFirebase
+import com.example.shoesshop.data.gmail.EmailController
 import com.example.shoesshop.datastore.MySharedPreferences
 import dagger.hilt.android.HiltAndroidApp
 
@@ -27,6 +28,7 @@ class MainApplication : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         FetchDataFirebase.share.init()
         MySharedPreferences.shared.init(this)
+        EmailController.shared.init("your_email@gmail.com", "your_password")
     }
 
 //    private fun initTimber() {

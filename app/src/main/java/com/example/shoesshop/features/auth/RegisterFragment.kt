@@ -12,6 +12,7 @@ import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
+import com.example.shoesshop.data.gmail.EmailController
 import com.example.shoesshop.databinding.FragmentLoginBinding
 import com.example.shoesshop.databinding.FragmentRegisterBinding
 import com.example.shoesshop.model.CardUser
@@ -58,8 +59,10 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                    if (isSuccess)
                    {
                        Toast.makeText(this@RegisterFragment.activity,"Sucesss!",Toast.LENGTH_SHORT).show().let {
+                           EmailController.shared.sendMail("Register Account","Thanks You Register Account!","test@gmail.com")
                            findNavController().popBackStack()
                        }
+
                    }else
                    {
                        Toast.makeText(this@RegisterFragment.activity,"Fail!",Toast.LENGTH_SHORT).show()
