@@ -202,7 +202,7 @@ class FetchDataFirebase {
         }
     }
 
-    fun UpdateCheckOut(item:Employee,callback: ActionCallback)
+    fun UpdateUser(item:Employee,callback: ActionCallback)
     {
         dataUser.child(item.id!!).removeValue().let {
             dataUser.child(item.id!!).setValue(item).addOnSuccessListener {
@@ -232,7 +232,7 @@ class FetchDataFirebase {
         }
     }
 
-    fun UpdateCheckOut(item:Product,callback: ActionCallback)
+    fun UpdateProduct(item:Product,callback: ActionCallback)
     {
         dataUser.child(item.id.toString()).removeValue().let {
             dataUser.child(item.id.toString()).setValue(item).addOnSuccessListener {

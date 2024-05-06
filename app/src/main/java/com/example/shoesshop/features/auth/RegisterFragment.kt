@@ -56,9 +56,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                         list.add(1) //  Đọc
                         list.add(0) // Viết
                         list.add(0) // Xoá => tuỳ bác muốn set vị trí
-                        val user = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
+                        val item = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
                             0,list,"",user?.email,binding.layoutPassword.edtPassword.text.toString())
-                        FetchDataFirebase.share.addUser(user,object : ActionCallback{
+                        FetchDataFirebase.share.addUser(item,object : ActionCallback{
                             override fun onActionComplete(isSuccess: Boolean) {
                                 if (isSuccess)
                                 {

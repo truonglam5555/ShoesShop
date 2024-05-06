@@ -62,7 +62,7 @@ class ProductCartAdapter :
             tvPrice.text =
                 itemView.resources.getString(R.string.text_price, menuItem.product?.price)
             imgProduct.setImage(menuItem.product?.image)
-
+            tvQuantity.text=menuItem.quantity.toString()
         }
 
         init {

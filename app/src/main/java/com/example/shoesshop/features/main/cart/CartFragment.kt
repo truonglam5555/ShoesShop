@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.constants.DataShared
 import com.example.shoesshop.constants.RecyclerValue
+import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentCartBinding
@@ -24,6 +26,7 @@ import com.example.shoesshop.features.main.cart.adapter.ProductCartAdapter
 import com.example.shoesshop.features.main.cart.model.CartProduct
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.features.main.home.view_model.HomeViewModel
+import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
 import com.example.shoesshop.utils.ViewUtils.navigateTo
@@ -36,7 +39,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     private lateinit var productCartAdapter: ProductCartAdapter
 
     var listProductCartt: MutableList<CartProduct> = mutableListOf()
-
+    var listCard : ArrayList<CardUser> = ArrayList()
 
     override fun onViewCreated() {
         initAdapter()
@@ -55,26 +58,11 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         val user = FetchDataFirebase.share.getEmployeeById(idUser!!)
         if (user?.listCard != null)
         {
-            user.listCard!!.forEach {
-                val pro = getProduct(it.idPruduct)
-                if (pro != null)
-                {
-                    listProductCartt.add(
-                        CartProduct(
-                            Product(id = it.idPruduct!!, image = "", pro.name,
-                                pro.price?.times(it.total!!)
-                            ),
-                            quantity = it.total
-                        )
-                    )
-                }
-
-            }
-
-            productCartAdapter.submitList(listProductCartt)
-            productCartAdapter.notifyDataSetChanged()
+            listCard = user.listCard!!
+            setListAdapter()
         }
     }
+
 
     private fun getProduct( id : Int?) :Product?  {
         if (FetchDataFirebase.share.listProduct.isNotEmpty())
@@ -95,7 +83,134 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             homeViewModel.product.value = it.product
             requireView().navigateTo(R.id.action_cartFragment_to_productDetailFragment)
         }
+
+        productCartAdapter.onItemDeleteButtonClick = {
+            if (listCard.isNotEmpty())
+            {
+                val  item = getUserCard(it.product!!.id)
+                if (item != null)
+                {
+                    val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+                    FetchDataFirebase.share.getEmployeeById(idUser!!).let {
+                        if (it != null)
+                        {
+                            listCard.remove(item)
+                            it.listCard = listCard
+                            FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
+                                override fun onActionComplete(isSuccess: Boolean) {
+                                    if (isSuccess)
+                                    {
+                                        setListAdapter()
+                                    }
+                                }
+
+                            })
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        productCartAdapter.onItemAddButtonClick ={
+            val pro = it
+            if (listCard.isNotEmpty())
+            {
+                    val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+                    FetchDataFirebase.share.getEmployeeById(idUser!!).let {
+                        if (it != null)
+                        {
+                            listCard.forEach{
+                                if (it.idPruduct == pro.product!!.id )
+                                {
+                                    it.total = it.total!! +1
+                                }
+
+                            }
+                            it.listCard = listCard
+                            FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
+                                override fun onActionComplete(isSuccess: Boolean) {
+                                    if (isSuccess)
+                                    {
+                                        setListAdapter()
+                                    }
+                                }
+
+                            })
+                        }
+                }
+            }
+        }
+
+        productCartAdapter.onItemSubButtonClick = {
+            val pro = it
+            if (listCard.isNotEmpty())
+            {
+                val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+                FetchDataFirebase.share.getEmployeeById(idUser!!).let {
+                    if (it != null)
+                    {
+                        listCard.forEach{
+                            if (it.idPruduct == pro.product!!.id )
+                            {
+                                if (it.total!! > 1)
+                                {
+                                    it.total = it.total!! -1
+                                }
+                            }
+
+                        }
+                        it.listCard = listCard
+                        FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    setListAdapter()
+                                }
+                            }
+
+                        })
+                    }
+                }
+            }
+        }
     }
+
+    fun  setListAdapter()
+    {
+        listProductCartt.clear()
+        listCard.forEach {
+            val pro = getProduct(it.idPruduct)
+            if (pro != null)
+            {
+                listProductCartt.add(
+                    CartProduct(
+                        Product(id = it.idPruduct!!, image = "", pro.name,
+                            pro.price?.times(it.total!!)
+                        ),
+                        quantity = it.total
+                    )
+                )
+            }
+
+        }
+
+        productCartAdapter.submitList(listProductCartt)
+        productCartAdapter.notifyDataSetChanged()
+    }
+    private fun getUserCard(id:Int) : CardUser?
+    {
+        for (card in listCard)
+        {
+            if (id == card.idPruduct)
+            {
+                return card
+            }
+        }
+        return null
+    }
+
 
     override fun initAction() {
         binding.layoutHeader.imgBack.setOnClickListener {
