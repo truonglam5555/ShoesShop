@@ -23,6 +23,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -39,6 +40,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
+//    packaging {
+//        dex {
+//            useLegacyPackaging = false
+//        }
+//        resources {
+//            this.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+//        }
+//    }
+    packagingOptions { resources.excludes.add("META-INF/*") }
 
 }
 

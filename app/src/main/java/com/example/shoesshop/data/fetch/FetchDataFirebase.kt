@@ -91,6 +91,15 @@ class FetchDataFirebase {
         return null // If no employee found with the given ID
     }
 
+    fun getEmployeeByEmail(email: String): Employee? {
+        for (employee in listUser) {
+            if (employee.email == email) {
+                return employee
+            }
+        }
+        return null // If no employee found with the given ID
+    }
+
     private fun setImage(id : Int) : List<Int>
     {
         when(id)
