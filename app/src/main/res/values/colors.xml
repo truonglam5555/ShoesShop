@@ -12,6 +12,8 @@
     <color name="colorAccentAlpha_10">#1A95C623</color>
     <color name="colorGreenDarkerAlpha_10">#1A002626</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="blue_main">#3385FF</color>
+    <color name="defaultText">#7A7B7C</color>
 
 
     <color name="main_color">#0D6EFD</color>

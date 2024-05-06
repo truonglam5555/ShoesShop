@@ -1,6 +1,6 @@
 package com.example.shoesshop.features.main.home
 
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +11,8 @@ import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentHomeBinding
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.main.activity.DetailActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.home.adapter.CategoryAdapter
 import com.example.shoesshop.features.main.home.adapter.ProductAdapter
 import com.example.shoesshop.features.main.home.model.Product
@@ -18,12 +20,12 @@ import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.model.Employee
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
-import com.example.shoesshop.utils.ViewUtils.navigateTo
-import com.google.firebase.database.DatabaseReference
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-
+companion object{
+    const val REPLACE_FRAGMENT = "REPLACE_FRAGMENT"
+}
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeBinding
         get() = FragmentHomeBinding::inflate
 
@@ -50,7 +52,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             homeViewModel.clearCheckAllCategory()
             it.isChecked = true
             categoryAdapter.notifyDataSetChanged()
-            //og.d("HomeFragment", "id ${it.id} isCheck = ${it.isChecked}")
             filterProducts(it.name)
         }
 
@@ -64,7 +65,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
         productAdapter.onItemClick = {
             homeViewModel.product.value = it
-            requireView().navigateTo(R.id.action_homeFragment_to_productDetailFragment)
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
+            startActivity(intent)
+
+//            requireView().navigateTo(R.id.action_homeFragment_to_productDetailFragment)
         }
         productAdapter.onItemAddToCartClick = {
             val product = it;
@@ -145,7 +150,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initAction() {
         binding.cardSearch.setOnClickListener {
-            it.navigateTo(R.id.action_homeFragment_to_searchFragment)
+
         }
     }
 
@@ -155,7 +160,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 //        binding.layoutHeader.imgBack.hideView()
     }
 
-    fun filterProducts(type: String)
+    private fun filterProducts(type: String)
     {
         val  listFilter : ArrayList<Product> = ArrayList()
 

@@ -3,15 +3,13 @@ package com.example.shoesshop.features.auth
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.databinding.FragmentOTPBinding
-import com.example.shoesshop.features.main.home.HomeActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.TextInputUtils.countdownTimer
-import com.otpview.OTPListener
 import com.otpview.OTPTextView
 
 class OTPFragment : BaseFragment<FragmentOTPBinding>() {

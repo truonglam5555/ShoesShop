@@ -22,7 +22,8 @@ class HomeViewModel : ViewModel() {
         listCate.add(Category(1, "All Shoes", true))
         listCate.add(Category(2, "Outdoor", false))
         listCate.add(Category(3, "Tennis", false))
-        listCate.add(Category(4, "Shoes", false))
+        listCate.add(Category(4, "Sports", false))
+        listCate.add(Category(5, "Sneaker", false))
         return listCate
     }
 

@@ -14,7 +14,10 @@
         android:theme="@style/Theme.ShoesShop"
         tools:targetApi="31">
         <activity
-            android:name=".features.main.home.HomeActivity"
+            android:name=".features.main.activity.DetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.main.activity.HomeActivity"
             android:exported="false"
             android:theme="@style/Theme.ShoesShop" />
         <activity
@@ -32,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".features.main.activity.MainActivity" />
     </application>
 
 </manifest>

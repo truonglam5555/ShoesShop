@@ -1,5 +1,6 @@
 package com.example.shoesshop.features.main.favorite
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.shoesshop.R
@@ -8,6 +9,9 @@ import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.main.activity.DetailActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
+import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.home.adapter.ProductAdapter
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.Employee
@@ -47,7 +51,9 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         }
         productAdapter.onItemClick = {
             homeViewModel.product.value = it
-            requireView().navigateTo(R.id.action_favoriteFragment_to_productDetailFragment)
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
+            startActivity(intent)
         }
     }
 
@@ -78,9 +84,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     }
 
     override fun initView() {
-        binding.layoutHeader.tvTitle.text = getString(R.string.text_favourite_title)
-        binding.layoutHeader.icControl.setImage(R.drawable.ic_heart_circle_white)
-        binding.layoutHeader.icControl.showView()
         binding.layoutFav.layoutTitleMenu2.hideView()
 
     }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_13"
+    android:layout_weight="1"
+    android:id="@+id/item_shoe"
+    android:background="@color/background_view_color"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/layout_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/spacing_13"
+        android:paddingTop="@dimen/spacing_13"
+        android:paddingBottom="@dimen/spacing_13"
+        android:layout_weight="0.8"
+        android:background="@drawable/cart_background_quatity"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:weightSum="3">
+
+        <ImageView
+            android:id="@+id/img_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_10"
+            android:scaleX="1.7"
+            android:scaleY="1.7"
+            android:src="@drawable/ic_add" />
+
+        <TextView
+            android:id="@+id/tv_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_12" />
+
+        <ImageView
+            android:id="@+id/img_sub_product"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/spacing_10"
+            android:paddingTop="@dimen/spacing_12"
+            android:paddingRight="@dimen/spacing_10"
+            android:paddingBottom="@dimen/spacing_10"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:src="@drawable/ic_sub" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_13"
+        android:paddingTop="@dimen/spacing_13"
+        android:paddingBottom="@dimen/spacing_13"
+        android:layout_marginEnd="@dimen/spacing_13"
+        android:layout_weight="0.2"
+
+        android:background="@drawable/cart_background_view">
+
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="@dimen/button_size_70"
+            android:layout_height="@dimen/button_size_70"
+            android:layout_marginStart="@dimen/spacing_10"
+            android:src="@drawable/_img_shoe_1"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_15"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_product"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Nike Club Max"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/text_size_13" />
+
+            <TextView
+                android:id="@+id/tv_total_product"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="2 products"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/text_size_13" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="1"
+                android:text="Total Price: $584.95"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_13" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

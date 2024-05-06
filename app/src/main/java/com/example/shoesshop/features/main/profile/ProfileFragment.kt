@@ -1,10 +1,13 @@
 package com.example.shoesshop.features.main.profile
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.common.extension.clickWithAnimationDebounce
 import com.example.shoesshop.databinding.FragmentProfileBinding
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.ViewUtils.navigateTo
 
@@ -17,8 +20,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     override fun initAction() {
-        binding.btLogin.setOnClickListener {
-            it.navigateTo(R.id.action_profileFragment_to_profileInformationFragment)
+        binding.btSave.setOnClickListener {
+//            it.navigateTo(R.id.action_profileFragment_to_profileInformationFragment)
+        }
+        binding.layoutHeader.imgBack.clickWithAnimationDebounce {
+            startActivity(Intent(requireContext(), HomeActivity::class.java))
         }
     }
 
