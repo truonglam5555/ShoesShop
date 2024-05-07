@@ -55,6 +55,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
             viewTabFavorite.clickWithAnimationDebounce {
                 if (viewPager.currentItem != 1) viewPager.setCurrentItem(1, true)
+                frmFav.refreshAdepter()
                 tvTab.text = getString(R.string.tv_favorite)
                 tvTabFav.text = getString(R.string.tv_favorite)
                 icMessage.setImageResource(R.drawable.ic_fav_unchecked)

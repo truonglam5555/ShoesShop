@@ -8,6 +8,7 @@ import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.detail.adapter.AdapterSize
+import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.ViewUtils.hideView
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,14 +27,24 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         adapterSize = AdapterSize(requireContext())
 //        initAdapter()
 //        click()
-        initSize()
+        //initSize()
 
     }
 
-    private fun initSize() {
+    fun setProduct(product: Product)
+    {
+        binding.tvName.text = product.name
+        binding.tvType.text = product.type
+        binding.tvPrice.text = product.price.toString()
+        binding.imgProduct.setImage(product.img_list!!.get(0))
+        initSize(product.sizes!!)
+    }
+
+    private fun initSize(sizes : List<Double>) {
         binding.apply {
             recyclerViewSize.adapter = adapterSize.apply {
-                this.data = getData().toMutableList()
+                //this.data = getData().toMutableList()
+                this.data = sizes.map { it.toString() }.toMutableList()
             }
         }
     }

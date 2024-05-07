@@ -41,6 +41,22 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         user = FetchDataFirebase.share.getEmployeeById(idUser!!)
     }
 
+    fun refreshAdepter()
+    {
+        getUser()
+        val listProduct = ArrayList<Product>()
+        FetchDataFirebase.share.listProduct.forEach {
+            val isID =  getIdlikeById(it.id)
+            if (isID != null)
+            {
+                listProduct.add(it)
+            }
+        }
+        //productAdapter.submitList(homeViewModel.listProductt)
+        productAdapter.submitList(listProduct)
+        productAdapter.notifyDataSetChanged()
+    }
+
     private fun click() {
         productAdapter.onItemFaveClick = {
             it.isFav = !it.isFav
