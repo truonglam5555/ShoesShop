@@ -2,6 +2,7 @@ package com.example.shoesshop.features.main.cart
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -22,8 +23,11 @@ import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentCartBinding
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.main.activity.DetailActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.cart.adapter.ProductCartAdapter
 import com.example.shoesshop.features.main.cart.model.CartProduct
+import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.features.main.home.view_model.HomeViewModel
 import com.example.shoesshop.model.CardUser
@@ -54,7 +58,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             mAdapter = productCartAdapter,
             rev = binding.layoutCart.revCommon
         )
-        val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+        val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
         val user = FetchDataFirebase.share.getEmployeeById(idUser!!)
         if (user?.listCard != null)
         {
@@ -68,20 +72,21 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         if (FetchDataFirebase.share.listProduct.isNotEmpty())
         {
             FetchDataFirebase.share.listProduct.forEach {
-                if (it.id == id)
-                {
+                if (it.id == id) {
                     return it
                 }
             }
         }
 
-        return  null
+        return null
     }
 
     private fun click() {
         productCartAdapter.onItemClick = {
             homeViewModel.product.value = it.product
-            requireView().navigateTo(R.id.action_cartFragment_to_productDetailFragment)
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
+            startActivity(intent)
         }
 
         productCartAdapter.onItemDeleteButtonClick = {
@@ -213,26 +218,21 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
 
     override fun initAction() {
-        binding.layoutHeader.imgBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
-            it.navigateTo(R.id.action_cartFragment_to_cartDetailFragment)
+
+//            it.navigateTo(R.id.action_cartFragment_to_cartDetailFragment)
         }
     }
 
     @SuppressLint("StringFormatMatches")
     override fun initView() {
         productCartViewModel.listProductCartt.apply {
-            binding.layoutHeader.tvTitle.text = getString(R.string.text_my_cart)
-            binding.layoutCart.tvTitle.text = getString(R.string.text_item_cart_quantity, productCartAdapter.itemCount)
+            binding.layoutCart.tvTitle.text =
+                getString(R.string.text_item_cart_quantity, productCartAdapter.itemCount)
             binding.layoutCart.tvNext.hideView()
         }
-
     }
-
-
-
 
     private val simpleItemTouchCallback =
         object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -290,4 +290,5 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 }
 
             }
-        }}
+        }
+}

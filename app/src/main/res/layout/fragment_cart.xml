@@ -9,29 +9,16 @@
     tools:context=".features.main.cart.CartFragment">
 
     <LinearLayout
-        android:id="@+id/layout_of_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
-    </LinearLayout>
-    <!--    <androidx.core.widget.NestedScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="0dp">-->
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/layout_bottom"
-        app:layout_constraintTop_toBottomOf="@id/layout_of_header">
+        app:layout_constraintTop_toTopOf="parent">
 
-    <include
-        android:id="@+id/layout_cart"
-        layout="@layout/layout_menu_horizontal" />
-            </LinearLayout>
-<!--        </androidx.core.widget.NestedScrollView>-->
+        <include
+            android:id="@+id/layout_cart"
+            layout="@layout/layout_menu_horizontal" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/layout_bottom"
         android:layout_width="match_parent"

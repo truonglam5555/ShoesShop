@@ -3,18 +3,14 @@ package com.example.shoesshop.features.splash
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.window.layout.WindowMetricsCalculator
 import com.example.shoesshop.base.BaseActivity
 import com.example.shoesshop.constants.DataShared
 import com.example.shoesshop.data.fetch.KeyDataFireBase
-import com.example.shoesshop.databinding.ActivityAuthBinding
 import com.example.shoesshop.databinding.ActivitySplashBinding
 import com.example.shoesshop.datastore.MySharedPreferences
-import com.example.shoesshop.features.main.activity.MainActivity
-import com.example.shoesshop.features.main.home.HomeActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.welcome.WelcomeActivity
 
 class SpashActivity() : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate){
@@ -48,7 +44,6 @@ class SpashActivity() : BaseActivity<ActivitySplashBinding>(ActivitySplashBindin
             }else{
                 startActivity(Intent(this, WelcomeActivity::class.java))
             }
-//            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }, 3000)
     }

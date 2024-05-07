@@ -4,6 +4,7 @@
     <string name="tv_my_cart">My cart</string>
     <string name="tv_favorite">Favorite</string>
     <string name="tv_orders">Orders</string>
+    <string name="tv_home">Home</string>
     <string name="tv_notification">Notification</string>
     <string name="tv_setting">Setting</string>
     <string name="tv_sign_out">Sign out</string>

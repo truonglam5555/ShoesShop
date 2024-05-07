@@ -7,10 +7,6 @@
     android:background="@color/background_view_color"
     tools:context=".features.main.favorite.FavoriteFragment">
 
-    <include
-        android:id="@+id/layout_header"
-        layout="@layout/layout_header" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

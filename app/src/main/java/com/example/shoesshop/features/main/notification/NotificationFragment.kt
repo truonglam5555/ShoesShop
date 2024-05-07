@@ -47,18 +47,9 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
     }
 
     override fun initAction() {
-        binding.layoutHeader.imgBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
 
     override fun initView() {
-
-        binding.layoutHeader.tvTitle.text = getString(R.string.text_notifications)
-        binding.layoutHeader.icControl.showView()
-        binding.layoutHeader.icControl.setImage(R.drawable.ic_delete_circle)
-
-
         notificationViewModel.setNotification()
 //        Recent
         binding.layoutRecent.tvNext.hideView()

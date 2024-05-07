@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.main.orders.OrdersFragment">
+    android:orientation="vertical"
+   >
+    <include
+        android:id="@+id/layout_header"
+        layout="@layout/layout_header" />
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="match_parent"
-        android:text="Orders Fragment" />
-
-</FrameLayout>
+        tools:listitem="@layout/item_order" />
+</LinearLayout>
