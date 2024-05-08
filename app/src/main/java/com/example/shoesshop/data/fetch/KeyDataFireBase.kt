@@ -10,5 +10,6 @@ class KeyDataFireBase {
         val keyListLike = "listLike"
         val keyProduct = "products"
         val keyBillOders = "billoders"
+        val keyChat = "chats"
     }
 }

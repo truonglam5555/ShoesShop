@@ -8,6 +8,8 @@ import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.BillOder
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.model.Employee
+import com.example.shoesshop.model.MessageChat
+import com.example.shoesshop.model.MessageUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -29,6 +31,9 @@ class FetchDataFirebase {
     lateinit var dataUser : DatabaseReference
     lateinit var dataProduct : DatabaseReference
     lateinit var dataBillOder : DatabaseReference
+    lateinit var dataChats : DatabaseReference
+    private  var userChat: MessageUser? = null
+    private var listUserChat : ArrayList<MessageUser> = ArrayList()
     var productSelect: Product? = null
     companion object{
         val share = FetchDataFirebase()
@@ -94,6 +99,59 @@ class FetchDataFirebase {
 
         })
     }
+
+    fun fetchChatDataUser(callback: UserChatCallback)
+    {
+        dataChats = database.getReference(KeyDataFireBase.keyChat)
+        dataChats.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    val user = getCurrentUser()
+                    snapshot.children.forEach {
+                        val item = it.getValue(MessageUser::class.java)
+                        if (item != null && user.isadmid == 0 && item.idUser ==  user.id)
+                        {
+                            userChat = item
+                            userChat?.messages?.let { it1 -> callback.onActionChat(it1) };
+                        }
+                    }
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+    fun fetchChatDataAdmin(callback: AdminChatCallback)
+    {
+        dataChats = database.getReference(KeyDataFireBase.keyChat)
+        dataChats.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists())
+                {
+                    listUserChat.clear();
+                    //val list : ArrayList<MessageUser> = ArrayList()
+                    snapshot.children.forEach {
+                        val item = it.getValue(MessageUser::class.java)
+                        listUserChat.add(item!!)
+                    }
+                    callback.onActionChat(listUserChat)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+
 
     fun getEmployeeById(id: String): Employee? {
         for (employee in listUser) {
@@ -263,6 +321,56 @@ class FetchDataFirebase {
             callback.onActionComplete(null,it.message)
         }
     }
+
+    fun addUserChat(message:String)
+    {
+        if (userChat == null)
+        {
+            val  user = getCurrentUser()
+            val messages = ArrayList<MessageChat>()
+            messages.add(MessageChat(
+                true,
+                message
+            ))
+            val chatUser = MessageUser(idUser = user.id, messages = messages)
+            dataChats.child(user.id!!).setValue(chatUser)
+        }else{
+            dataChats.child(userChat!!.idUser!!).removeValue().addOnSuccessListener {
+                userChat!!.messages!!.add(MessageChat(
+                    true,
+                    message
+                ))
+                dataChats.child(userChat!!.idUser!!).setValue(userChat)
+            }.addOnFailureListener {
+
+            }
+        }
+    }
+
+    fun addAdminChat(message:String,idUser :String)
+    {
+        if (listUserChat.isNotEmpty())
+        {
+            listUserChat.forEach {
+                if (it.idUser == idUser)
+                {
+                    userChat = it
+                }
+            }
+            if (userChat != null)
+            {
+                dataChats.child(userChat!!.idUser!!).removeValue().addOnSuccessListener {
+                    userChat!!.messages!!.add(MessageChat(
+                        true,
+                        message
+                    ))
+                    dataChats.child(userChat!!.idUser!!).setValue(userChat)
+                }.addOnFailureListener {
+
+                }
+            }
+        }
+    }
 }
 
 interface ActionCallback {
@@ -271,5 +379,13 @@ interface ActionCallback {
 
 interface UpFileCallback {
     fun onActionComplete(url:Uri? = null,message: String? = null)
+}
+
+interface UserChatCallback {
+    fun onActionChat(list:ArrayList<MessageChat>)
+}
+
+interface AdminChatCallback {
+    fun onActionChat(list:ArrayList<MessageUser>)
 }
 
