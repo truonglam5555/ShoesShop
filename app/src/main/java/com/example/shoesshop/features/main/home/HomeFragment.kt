@@ -90,12 +90,12 @@ companion object{
                         FetchDataFirebase.share.dataUser.child(idUser).child(KeyDataFireBase.keyListCard).setValue(user!!.listCard!!)
                     }
                 }else{
-                    user!!.listCard!!.add(CardUser(product.id,1))
+                    user!!.listCard!!.add(CardUser(product.id,product.sizes!!.first(),1))
                     FetchDataFirebase.share.dataUser.child(idUser).child(KeyDataFireBase.keyListCard).setValue(user!!.listCard!!)
                 }
             }else if (user != null && user!!.listCard.isNullOrEmpty()){
                 val  list = ArrayList<CardUser>()
-                list.add(CardUser(product.id,1))
+                list.add(CardUser(product.id,product.sizes!!.first(),1))
                 FetchDataFirebase.share.dataUser.child(idUser).child(KeyDataFireBase.keyListCard).setValue(list)
             }
         }
