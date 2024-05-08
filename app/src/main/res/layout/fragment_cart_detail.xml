@@ -1,75 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/background_view_color"
+    android:orientation="vertical"
     tools:context=".features.main.cart.CartDetailFragment">
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/layout_of_header"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
             android:id="@+id/layout_header"
-            />
+            layout="@layout/layout_header" />
     </LinearLayout>
 
-   <androidx.core.widget.NestedScrollView
-       android:layout_width="match_parent"
-       app:layout_constraintTop_toBottomOf="@id/layout_of_header"
-       android:layout_margin="@dimen/spacing_13"
-       app:layout_constraintBottom_toTopOf="@id/layout_of_check_out"
-       android:layout_height="0dp">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:orientation="vertical"
-           android:paddingBottom="@dimen/spacing_13"
-           android:background="@drawable/cart_background_view"
-           android:layout_height="match_parent">
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:id="@+id/tv_contact_information"
-               android:layout_marginStart="@dimen/spacing_13"
-               android:layout_marginTop="@dimen/spacing_13"
-               style="@style/TextLayoutBasicStyle"
-               android:text="@string/text_contact_information"
-               />
-           <include layout="@layout/layout_common_info"
-               android:id="@+id/layout_email"
-               />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_13"
+        app:layout_constraintBottom_toTopOf="@id/layout_of_check_out"
+        app:layout_constraintTop_toBottomOf="@id/layout_of_header">
 
-           <include layout="@layout/layout_common_info"
-               android:id="@+id/layout_phone"
-               />
-            <include layout="@layout/layout_info_address"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cart_background_view"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_13">
+
+            <TextView
+                android:id="@+id/tv_contact_information"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginTop="@dimen/spacing_13"
+                android:text="@string/text_contact_information" />
+
+            <include
+                android:id="@+id/layout_email"
+                layout="@layout/layout_common_info" />
+
+            <include
+                android:id="@+id/layout_phone"
+                layout="@layout/layout_common_info" />
+
+            <include
                 android:id="@+id/layout_info_address"
-                />
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:id="@+id/tv_payment_method"
-               android:layout_marginStart="@dimen/spacing_13"
-               android:layout_marginTop="@dimen/spacing_13"
-               style="@style/TextLayoutBasicStyle"
-               android:text="@string/text_payment_method"
-               />
-           <include layout="@layout/layout_payment"
-               android:id="@+id/layout_payment"
-               />
-       </LinearLayout>
-   </androidx.core.widget.NestedScrollView>
+                layout="@layout/layout_info_address" />
+
+            <TextView
+                android:id="@+id/tv_payment_method"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_13"
+                android:layout_marginTop="@dimen/spacing_13"
+                android:text="@string/text_payment_method" />
+
+            <include
+                android:id="@+id/layout_payment"
+                layout="@layout/layout_payment" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/layout_of_check_out"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <include
             android:id="@+id/layout_bottom_checkout"
             layout="@layout/layout_bottom_checkout" />

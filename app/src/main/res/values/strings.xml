@@ -127,6 +127,7 @@
     <string name="text_notifications">Notifications</string>
     <string name="text_save_now">Save Now</string>
     <string name="text_profile">Profile</string>
+    <string name="text_order">Detail Order</string>
     <string name="text_change_profile_picture">Change Profile Picture</string>
     <string name="text_done">Done</string>
     <string name="text_first_name">First Name</string>
