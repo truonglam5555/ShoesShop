@@ -1,6 +1,7 @@
 package com.example.shoesshop.data.fetch
 
 import android.net.Uri
+import android.util.Log
 import android.webkit.ConsoleMessage
 import com.example.shoesshop.R
 import com.example.shoesshop.datastore.MySharedPreferences
@@ -206,6 +207,7 @@ class FetchDataFirebase {
                {
                    listBillOder.clear()
                    snapshot.children.forEach{
+                       Log.d("Bill",it.toString())
                        listBillOder.add(it.getValue(BillOder::class.java)!!)
                    }
                }

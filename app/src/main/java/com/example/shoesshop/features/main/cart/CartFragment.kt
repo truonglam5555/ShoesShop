@@ -236,7 +236,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
             val user = FetchDataFirebase.share.getCurrentUser()
             val curentTime = System.currentTimeMillis();
-            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!,user.id!!, curentTime,0,curentTime,total,shipCod,user!!.listCard!!)
+            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!,user.id!!, curentTime,0,curentTime,shipCod,user!!.listCard!!)
             user.listCard = ArrayList()
             FetchDataFirebase.share.UpdateUser(user,object : ActionCallback{
                 override fun onActionComplete(isSuccess: Boolean) {
