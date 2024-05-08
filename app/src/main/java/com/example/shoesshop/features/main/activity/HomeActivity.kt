@@ -62,6 +62,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
             viewTabCart.clickWithAnimationDebounce {
                 if (viewPager.currentItem != 2) viewPager.setCurrentItem(2, true)
+                frmCart.refreshCard()
                 tvTab.text = getString(R.string.tv_my_cart)
                 tvTabTabCart.text = getString(R.string.tv_my_cart)
                 icMessage.setImageResource(R.drawable.ic_cart)

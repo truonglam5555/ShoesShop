@@ -58,9 +58,19 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             mAdapter = productCartAdapter,
             rev = binding.layoutCart.revCommon
         )
-        val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
-        val user = FetchDataFirebase.share.getEmployeeById(idUser!!)
-        if (user?.listCard != null)
+
+        val user = FetchDataFirebase.share.getCurrentUser()
+        if (user.listCard != null)
+        {
+            listCard = user.listCard!!
+            setListAdapter()
+        }
+    }
+
+    fun refreshCard()
+    {
+        val user = FetchDataFirebase.share.getCurrentUser()
+        if (user.listCard != null)
         {
             listCard = user.listCard!!
             setListAdapter()

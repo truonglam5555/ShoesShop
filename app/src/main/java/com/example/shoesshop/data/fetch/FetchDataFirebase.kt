@@ -3,6 +3,7 @@ package com.example.shoesshop.data.fetch
 import android.net.Uri
 import android.webkit.ConsoleMessage
 import com.example.shoesshop.R
+import com.example.shoesshop.datastore.MySharedPreferences
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.BillOder
 import com.example.shoesshop.model.CardUser
@@ -40,6 +41,12 @@ class FetchDataFirebase {
         fetchUserData()
         fetchProductData()
         getListBillOder()
+    }
+
+     fun getCurrentUser() : Employee
+    {
+        val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+        return FetchDataFirebase.share.getEmployeeById(idUser!!)!!
     }
 
     private fun  fetchUserData()

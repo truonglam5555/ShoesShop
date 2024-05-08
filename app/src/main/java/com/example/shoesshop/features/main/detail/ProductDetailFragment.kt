@@ -3,12 +3,16 @@ package com.example.shoesshop.features.main.detail
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.data.fetch.ActionCallback
+import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.detail.adapter.AdapterSize
 import com.example.shoesshop.features.main.home.model.Product
+import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.ViewUtils.hideView
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +22,8 @@ import javax.inject.Inject
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
     lateinit var adapterSize: AdapterSize
+
+    var sizeSelect: String = ""
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
         get() = FragmentProductDetailBinding::inflate
 
@@ -28,10 +34,49 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 //        initAdapter()
 //        click()
         //initSize()
+        setProduct(homeViewModel.product.value!!)
+        adapterSize.subjectItem = {
+            sizeSelect = it
+        }
+        binding.linLayout.setOnClickListener{
+            if (sizeSelect.isNotEmpty())
+            {
 
+                val user = FetchDataFirebase.share.getCurrentUser()
+                if (user.listCard.isNullOrEmpty())
+                {
+                    val listCard: ArrayList<CardUser> = ArrayList()
+                    listCard.add(CardUser(homeViewModel.product.value!!.id,sizeSelect.toDouble(),1))
+                    user.listCard =listCard
+                    FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                        override fun onActionComplete(isSuccess: Boolean) {
+                            if (isSuccess)
+                            {
+                                Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                            }
+                        }
+                    })
+                }else{
+                    user.listCard!!.forEach {
+                        if (it.idPruduct == homeViewModel.product.value!!.id)
+                        {
+                            it.total = it.total!! +1;
+                        }
+                    }
+                    FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                        override fun onActionComplete(isSuccess: Boolean) {
+                            if (isSuccess)
+                            {
+                                Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                            }
+                        }
+                    })
+                }
+            }
+        }
     }
 
-    fun setProduct(product: Product)
+    private fun setProduct(product: Product)
     {
         binding.tvName.text = product.name
         binding.tvType.text = product.type
