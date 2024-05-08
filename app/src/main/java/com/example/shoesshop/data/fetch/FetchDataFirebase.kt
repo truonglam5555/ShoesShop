@@ -25,10 +25,11 @@ class FetchDataFirebase {
     var listBillOder : ArrayList<BillOder> = ArrayList()
     val database = Firebase.database
     private val storage = Firebase.storage
-      val auth: FirebaseAuth
+    val auth: FirebaseAuth
     lateinit var dataUser : DatabaseReference
     lateinit var dataProduct : DatabaseReference
     lateinit var dataBillOder : DatabaseReference
+    var productSelect: Product? = null
     companion object{
         val share = FetchDataFirebase()
     }
@@ -46,7 +47,7 @@ class FetchDataFirebase {
      fun getCurrentUser() : Employee
     {
         val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
-        return FetchDataFirebase.share.getEmployeeById(idUser!!)!!
+        return getEmployeeById(idUser!!)!!
     }
 
     private fun  fetchUserData()

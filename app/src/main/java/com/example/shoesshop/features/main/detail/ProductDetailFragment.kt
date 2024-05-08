@@ -34,46 +34,50 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 //        initAdapter()
 //        click()
         //initSize()
-        setProduct(homeViewModel.product.value!!)
-        adapterSize.subjectItem = {
-            sizeSelect = it
-        }
-        binding.linLayout.setOnClickListener{
-            if (sizeSelect.isNotEmpty())
-            {
-
-                val user = FetchDataFirebase.share.getCurrentUser()
-                if (user.listCard.isNullOrEmpty())
+        if (FetchDataFirebase.share.productSelect != null)
+        {
+            setProduct(FetchDataFirebase.share.productSelect!!)
+            adapterSize.subjectItem = {
+                sizeSelect = it
+            }
+            binding.linLayout.setOnClickListener{
+                if (sizeSelect.isNotEmpty())
                 {
-                    val listCard: ArrayList<CardUser> = ArrayList()
-                    listCard.add(CardUser(homeViewModel.product.value!!.id,sizeSelect.toDouble(),1))
-                    user.listCard =listCard
-                    FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
-                        override fun onActionComplete(isSuccess: Boolean) {
-                            if (isSuccess)
+
+                    val user = FetchDataFirebase.share.getCurrentUser()
+                    if (user.listCard.isNullOrEmpty())
+                    {
+                        val listCard: ArrayList<CardUser> = ArrayList()
+                        listCard.add(CardUser(FetchDataFirebase.share.productSelect!!.id,sizeSelect.toDouble(),1))
+                        user.listCard =listCard
+                        FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                                }
+                            }
+                        })
+                    }else{
+                        user.listCard!!.forEach {
+                            if (it.idPruduct == homeViewModel.product.value!!.id)
                             {
-                                Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                                it.total = it.total!! +1;
                             }
                         }
-                    })
-                }else{
-                    user.listCard!!.forEach {
-                        if (it.idPruduct == homeViewModel.product.value!!.id)
-                        {
-                            it.total = it.total!! +1;
-                        }
+                        FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                                }
+                            }
+                        })
                     }
-                    FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
-                        override fun onActionComplete(isSuccess: Boolean) {
-                            if (isSuccess)
-                            {
-                                Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
-                            }
-                        }
-                    })
                 }
             }
         }
+
     }
 
     private fun setProduct(product: Product)
@@ -82,6 +86,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         binding.tvType.text = product.type
         binding.tvPrice.text = product.price.toString()
         binding.imgProduct.setImage(product.img_list!!.get(0))
+        binding.tvDescription.text = product.description
         initSize(product.sizes!!)
     }
 

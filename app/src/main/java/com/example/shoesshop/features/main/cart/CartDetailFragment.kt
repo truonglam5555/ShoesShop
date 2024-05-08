@@ -67,17 +67,7 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         }
 
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
-            val curentTime = System.currentTimeMillis();
-            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!, curentTime,0,curentTime,total,shipCod,userData!!.listCard!!)
-            FetchDataFirebase.share.addCheckOut(checkOut,object : ActionCallback{
-                override fun onActionComplete(isSuccess: Boolean) {
-                    if (isSuccess)
-                    {
-                        popupSuccess.show(childFragmentManager,"")
-                    }
-                }
 
-            })
         }
 
         popupSuccess.onCallback = {

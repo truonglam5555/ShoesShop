@@ -64,7 +64,8 @@ companion object{
             handleLike(it)
         }
         productAdapter.onItemClick = {
-            homeViewModel.product.value = it
+            //homeViewModel.product.value = it
+            FetchDataFirebase.share.productSelect = it
             val intent = Intent(requireContext(), DetailActivity::class.java)
             intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
             startActivity(intent)

@@ -30,11 +30,13 @@ import com.example.shoesshop.features.main.cart.model.CartProduct
 import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.features.main.home.view_model.HomeViewModel
+import com.example.shoesshop.model.BillOder
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
 import com.example.shoesshop.utils.ViewUtils.navigateTo
 import com.example.shoesshop.utils.ViewUtils.showView
+import com.example.shoesshop.widgets.dialog.BasePopupSuccessFragment
 
 class CartFragment : BaseFragment<FragmentCartBinding>() {
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentCartBinding
@@ -44,6 +46,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
     var listProductCartt: MutableList<CartProduct> = mutableListOf()
     var listCard : ArrayList<CardUser> = ArrayList()
+    var total : Int =0;
+    var shipCod : Int = 50;
 
     override fun onViewCreated() {
         initAdapter()
@@ -230,8 +234,34 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     override fun initAction() {
 
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
+            val user = FetchDataFirebase.share.getCurrentUser()
+            val curentTime = System.currentTimeMillis();
+            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!,user.id!!, curentTime,0,curentTime,total,shipCod,user!!.listCard!!)
+            user.listCard = ArrayList()
+            FetchDataFirebase.share.UpdateUser(user,object : ActionCallback{
+                override fun onActionComplete(isSuccess: Boolean) {
+                    if (isSuccess)
+                    {
+                        FetchDataFirebase.share.addCheckOut(checkOut,object : ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    val popupSuccess = BasePopupSuccessFragment(
+                                        title = getString(R.string.text_your_payment_is_successful),
+                                        btText = getString(R.string.text_back_to_shopping)
+                                    )
+                                    popupSuccess.show(childFragmentManager,"")
 
-//            it.navigateTo(R.id.action_cartFragment_to_cartDetailFragment)
+                                    popupSuccess.onCallback = {
+                                        findNavController().popBackStack(R.id.homeFragment, false)
+                                    }
+                                }
+                            }
+
+                        })
+                    }
+                }
+            })
         }
     }
 

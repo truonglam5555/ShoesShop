@@ -13,11 +13,6 @@ class HomeViewModel : ViewModel() {
 
     var product = MutableLiveData<Product>()
 
-
-    fun setProduct(productNew: Product){
-        product.value = productNew
-    }
-
     fun getListCategory(): MutableList<Category> {
         listCate.add(Category(1, "All Shoes", true))
         listCate.add(Category(2, "Outdoor", false))
