@@ -63,11 +63,38 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         )
 
         binding.layoutHeader.imgBack.setOnClickListener {
-            findNavController().popBackStack()
+           this@CartDetailFragment.activity?.finish()
         }
 
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
+            val user = FetchDataFirebase.share.getCurrentUser()
+            val curentTime = System.currentTimeMillis();
+            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!,user.id!!, curentTime,0,curentTime,shipCod,user.listCard!!)
+            user.listCard = ArrayList()
+            FetchDataFirebase.share.UpdateUser(user,object : ActionCallback{
+                override fun onActionComplete(isSuccess: Boolean) {
+                    if (isSuccess)
+                    {
+                        FetchDataFirebase.share.addCheckOut(checkOut,object : ActionCallback{
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess)
+                                {
+                                    val popupSuccess = BasePopupSuccessFragment(
+                                        title = getString(R.string.text_your_payment_is_successful),
+                                        btText = getString(R.string.text_back_to_shopping)
+                                    )
+                                    popupSuccess.show(childFragmentManager,"")
 
+                                    popupSuccess.onCallback = {
+                                        findNavController().popBackStack(R.id.homeFragment, false)
+                                    }
+                                }
+                            }
+
+                        })
+                    }
+                }
+            })
         }
 
         popupSuccess.onCallback = {

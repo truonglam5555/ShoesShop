@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.common.extension.clickWithAnimationDebounce
+import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProfileBinding
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.utils.ImageUtils.setImage
@@ -30,14 +31,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     override fun initView() {
         binding.layoutHeader.imgBack.setImage(R.drawable.ic_back_auth)
+
+        val user = FetchDataFirebase.share.getCurrentUser()
         binding.layoutHeader.tvTitle.text = getString(R.string.text_profile)
 
         binding.layoutYourName.tvTitle.text = getString(R.string.text_your_name)
-        binding.layoutYourName.edtName.setText("EMMANUEL OYIBOKE")
+        binding.layoutYourName.edtName.setText(user.fullName)
 
         binding.layoutEmail.tvTitle.text = getString(R.string.text_email_address_title)
-        binding.layoutEmail.edtEmail.setText("emmanueloyiboke@gmail.com")
+        binding.layoutEmail.edtEmail.setText(user.email)
 
         binding.layoutPassword.tvTitle.text = getString(R.string.text_password_title)
+        binding.layoutPassword.edtPassword.setText(user.pass)
     }
 }

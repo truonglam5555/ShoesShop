@@ -47,43 +47,42 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     fun  listenner()
     {
         binding.btLogin.setOnClickListener{
-            FetchDataFirebase.share.auth.createUserWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
-                if (it.user !=null)
-                {
-                    val user =  it.user
-                    user?.sendEmailVerification().let {
-                        val list = ArrayList<Int>()
-                        list.add(1) //  Đọc
-                        list.add(0) // Viết
-                        list.add(0) // Xoá => tuỳ bác muốn set vị trí
-                        val item = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
-                            0,list,"",user?.email,binding.layoutPassword.edtPassword.text.toString())
-                        FetchDataFirebase.share.addUser(item,object : ActionCallback{
-                            override fun onActionComplete(isSuccess: Boolean) {
-                                if (isSuccess)
-                                {
-                                    Toast.makeText(this@RegisterFragment.activity,"Sucesss!",Toast.LENGTH_SHORT).show().let {
-                                        //EmailController.shared.sendMail("Register Account","Thanks You Register Account!",binding.layoutEmail.edtEmail.text.toString())
-                                        findNavController().popBackStack()
-                                    }
+            if (binding.layoutPassword.edtPassword.text.toString().length >=6)
+            {
+                FetchDataFirebase.share.auth.createUserWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
+                    if (it.user !=null)
+                    {
+                        val user =  it.user
+                        user?.sendEmailVerification().let {
+                            val list = ArrayList<Int>()
+                            list.add(1) //  Đọc
+                            list.add(0) // Viết
+                            list.add(0) // Xoá => tuỳ bác muốn set vị trí
+                            val item = Employee(FetchDataFirebase.share.dataUser.push().key!!,binding.layoutName.edtName.text.toString(),
+                                0,list,"",user?.email,binding.layoutPassword.edtPassword.text.toString())
+                            FetchDataFirebase.share.addUser(item,object : ActionCallback{
+                                override fun onActionComplete(isSuccess: Boolean) {
+                                    if (isSuccess)
+                                    {
+                                        Toast.makeText(this@RegisterFragment.activity,"Sucesss!",Toast.LENGTH_SHORT).show().let {
+                                            //EmailController.shared.sendMail("Register Account","Thanks You Register Account!",binding.layoutEmail.edtEmail.text.toString())
+                                            findNavController().popBackStack()
+                                        }
 
-                                }else
-                                {
-                                    Toast.makeText(this@RegisterFragment.activity,"Fail!",Toast.LENGTH_SHORT).show()
+                                    }else
+                                    {
+                                        Toast.makeText(this@RegisterFragment.activity,"Fail!",Toast.LENGTH_SHORT).show()
+                                    }
                                 }
-                            }
-                        })
+                            })
+                        }
                     }
+                }.addOnFailureListener{
+                    Toast.makeText(this@RegisterFragment.activity,it.message,Toast.LENGTH_SHORT).show()
                 }
-            }.addOnFailureListener{
-                Toast.makeText(this@RegisterFragment.activity,it.message,Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(this@RegisterFragment.activity,"Password not match or invalid!",Toast.LENGTH_SHORT).show()
             }
-//            if (binding.layoutEmail.edtEmail.text.toString().isNotEmpty()) return@setOnClickListener
-//            val item = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
-//            if (item == null)
-//            {
-////
-//            }
         }
     }
 }
