@@ -7,8 +7,8 @@ import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseActivity
 import com.example.shoesshop.databinding.ActivityDetailBinding
 import com.example.shoesshop.features.main.activity.HomeActivity.Companion.REPLACE_DRAWER
+import com.example.shoesshop.features.main.cart.CartDetailFragment
 import com.example.shoesshop.features.main.detail.ProductDetailFragment
-import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.orders.OrdersFragment
 import com.example.shoesshop.features.main.profile.ProfileFragment
 import com.example.shoesshop.features.main.setting.SettingFragment
@@ -28,6 +28,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             R.id.user -> replaceFragment(ProfileFragment())
             R.id.order -> replaceFragment(OrdersFragment())
             R.id.setting -> replaceFragment(SettingFragment())
+            4 -> replaceFragment(CartDetailFragment())
         }
     }
 

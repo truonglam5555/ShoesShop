@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProfileInfomationBinding
 import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.ViewUtils.showView
@@ -30,6 +31,8 @@ class ProfileInformationFragment : BaseFragment<FragmentProfileInfomationBinding
         binding.layoutHeader.tvTitle.text = getString(R.string.text_profile)
         binding.layoutHeader.imgBack.setImage(R.drawable.ic_back_auth)
         binding.layoutHeader.tvEnd.showView()
+
+
 
 //        First name
         binding.layoutFirstName.tvTitle.text = getString(R.string.text_first_name)
