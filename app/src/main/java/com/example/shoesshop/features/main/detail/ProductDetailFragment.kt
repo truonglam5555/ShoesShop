@@ -4,16 +4,20 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.constants.RecyclerValue
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.detail.adapter.AdapterSize
+import com.example.shoesshop.features.main.detail.adapter.ChooseColorProductAdapter
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
+import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,11 +31,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
         get() = FragmentProductDetailBinding::inflate
 
-//    private lateinit var chooseColorProductAdapter: ChooseColorProductAdapter
+    private lateinit var chooseColorProductAdapter: ChooseColorProductAdapter
 
     override fun onViewCreated() {
         adapterSize = AdapterSize(requireContext())
-//        initAdapter()
+        initAdapter()
 //        click()
         //initSize()
         if (FetchDataFirebase.share.productSelect != null)
@@ -84,7 +88,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     {
         binding.tvName.text = product.name
         binding.tvType.text = product.type
-        binding.tvPrice.text = product.price.toString()
+        binding.tvPrice.text = "$${product.price}"
         binding.imgProduct.setImage(product.img_list!!.get(0))
         binding.tvDescription.text = product.description
         initSize(product.sizes!!)
@@ -103,7 +107,8 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         return listOf("38", "39", "40", "41", "42", "43")
     }
 
-//    private fun initAdapter() {
+    private fun initAdapter() {
+        ///// 3 imageView here
 //        chooseColorProductAdapter =
 //            ChooseColorProductAdapter(homeViewModel.product.value?.img_list as MutableList<Int>)
 //        RecyclerViewUtils.initAdapter(
@@ -112,7 +117,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 //            orientation = LinearLayoutManager.HORIZONTAL,
 //            type = RecyclerValue.LINEAR_LAYOUT_MANAGER
 //        )
-//    }
+    }
 //
 //    private fun click() {
 //        chooseColorProductAdapter.onItemClick = {
@@ -127,19 +132,19 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     override fun initView() {
-        binding.layoutHeader.tvTitle.text = getString(R.string.text_sneaker_shop)
-        binding.layoutHeader.icControl.setImage(R.drawable.ic_shop)
-        binding.layoutChooseColor.layoutTitleMenu2.hideView()
-
-        homeViewModel.product.observe(viewLifecycleOwner) {
-            binding.imgProduct.setImage(it.image)
-            binding.tvName.text = it.name
-            binding.tvType.text = it.type
-            binding.tvPrice.text = it.price.toString()
-            binding.tvDescription.text = it.description
+//        binding.layoutHeader.tvTitle.text = getString(R.string.text_sneaker_shop)
+//        binding.layoutHeader.icControl.setImage(R.drawable.ic_shop)
+//        binding.layoutChooseColor.layoutTitleMenu2.hideView()
+//
+//        homeViewModel.product.observe(viewLifecycleOwner) {
+//            binding.imgProduct.setImage(it.image)
+//            binding.tvName.text = it.name
+//            binding.tvType.text = it.type
+//            binding.tvPrice.text = "$ ${it.price}"
+//            binding.tvDescription.text = it.description
 //            chooseColorProductAdapter.submitList(it.img_list)
 //            chooseColorProductAdapter.notifyDataSetChanged()
-        }
+//        }
     }
 
 }

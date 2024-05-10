@@ -57,6 +57,7 @@ android {
 dependencies {
     implementation(libs.androidx.window)
     implementation(libs.firebase.database)
+    implementation(libs.firebase.auth.ktx)
 
 
     val nav_version = "2.7.7"
