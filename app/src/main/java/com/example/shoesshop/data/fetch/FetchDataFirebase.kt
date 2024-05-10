@@ -161,6 +161,15 @@ class FetchDataFirebase {
         return null // If no employee found with the given ID
     }
 
+    fun getProductByID(id: Int): Product? {
+        for (pro in listProduct) {
+            if (pro.id == id) {
+                return pro
+            }
+        }
+        return null // If no employee found with the given ID
+    }
+
     private fun setImage(id: Int): List<Int> {
         when (id) {
             1 -> listOf(
