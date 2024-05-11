@@ -32,6 +32,8 @@
     <color name="color_background_box_stroke">#DEDEDE</color>
     <color name="color_background_box_stroke_active">#A5A5A5</color>
     <color name="drawer_color_background">#1483C2</color>
+    <color name="gray_200">#525252</color>
+    <color name="green">#00FF0A</color>
 
 
 </resources>
