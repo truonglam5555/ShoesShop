@@ -50,7 +50,7 @@ android {
 //            this.excludes += "/META-INF/{AL2.0,LGPL2.1}"
 //        }
 //    }
-    packagingOptions { resources.excludes.add("META-INF/*") }
+    //packagingOptions { resources.excludes.add("META-INF/*") }
 
 }
 
@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.firebase.database)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.auth)
 
 
     val nav_version = "2.7.7"
@@ -121,6 +122,6 @@ dependencies {
     implementation(libs.firebase.database.ktx)
 
     // Email
-    implementation( "com.sun.mail:android-mail:1.6.7")
-    implementation( "com.sun.mail:android-activation:1.6.7")
+//    implementation( "com.sun.mail:android-mail:1.6.7")
+//    implementation( "com.sun.mail:android-activation:1.6.7")
 }
