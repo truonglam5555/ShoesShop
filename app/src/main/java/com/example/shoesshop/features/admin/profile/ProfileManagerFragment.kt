@@ -12,10 +12,12 @@ import com.example.shoesshop.databinding.FragmentProfileManagerBinding
 import com.example.shoesshop.features.admin.product.DetailProductManagerActivity
 import com.example.shoesshop.model.Employee
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileManagerFragment : BaseFragment<FragmentProfileManagerBinding>() {
 
+    @Inject
     lateinit var adapterUserManager: AdapterUserManager
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProfileManagerBinding
         get() = FragmentProfileManagerBinding::inflate
