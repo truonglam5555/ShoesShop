@@ -142,6 +142,10 @@ class HomeManagerActivity :
             frmHome.resetCount()
             frmOrders.resetAdapter()
         }
+        if (resultCode == 101)
+        {
+            frmProduct.resetAdapter()
+        }
     }
 
 }

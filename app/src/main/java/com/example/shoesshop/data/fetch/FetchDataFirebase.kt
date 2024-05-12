@@ -230,7 +230,7 @@ class FetchDataFirebase {
         }
     }
 
-    fun deleteCheckOut(item: BillOder, callback: ActionCallback) {
+    fun deleteBill(item: BillOder, callback: ActionCallback) {
         dataBillOder.child(item.id).removeValue().addOnSuccessListener {
             callback.onActionComplete(true)
         }.addOnFailureListener {
@@ -258,7 +258,7 @@ class FetchDataFirebase {
         }
     }
 
-    fun deleteCheckOut(item: Employee, callback: ActionCallback) {
+    fun deleteUser(item: Employee, callback: ActionCallback) {
         dataUser.child(item.id!!).removeValue().addOnSuccessListener {
             callback.onActionComplete(true)
         }.addOnFailureListener {
@@ -285,7 +285,7 @@ class FetchDataFirebase {
         }
     }
 
-    fun deleteCheckOut(item: Product, callback: ActionCallback) {
+    fun deleteProducts(item: Product, callback: ActionCallback) {
         dataUser.child(item.id.toString()).removeValue().addOnSuccessListener {
             callback.onActionComplete(true)
         }.addOnFailureListener {

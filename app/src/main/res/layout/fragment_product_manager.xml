@@ -47,7 +47,7 @@
 
 
         <ImageView
-            android:id="@+id/ic_message"
+            android:id="@+id/btn_add_product"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_gravity="end|center|bottom"

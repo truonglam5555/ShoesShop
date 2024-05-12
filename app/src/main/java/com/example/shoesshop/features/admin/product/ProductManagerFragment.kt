@@ -3,7 +3,9 @@ package com.example.shoesshop.features.admin.product
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductManagerBinding
 import com.example.shoesshop.databinding.FragmentProfileManagerBinding
@@ -27,12 +29,26 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
 
     override fun initAction() {
         adapterProductManager.subjectRemove ={
-            //remove here
+            val item = FetchDataFirebase.share.getProductByID(it.idPro)
+           FetchDataFirebase.share.deleteProducts(item = item!!,object :ActionCallback{
+               override fun onActionComplete(isSuccess: Boolean) {
+                   if (isSuccess)
+                   {
+                       resetAdapter()
+                   }else{
+                       Toast.makeText(requireContext(),"Delete Product Fail!",Toast.LENGTH_LONG).show()
+                   }
+               }
+           })
         }
         adapterProductManager.subjectItem ={
             val intent = Intent(requireContext(), DetailProductManagerActivity::class.java)
-            intent.putExtra("idProduct", it)
-            startActivity(intent)
+            intent.putExtra("idProduct", it.idPro)
+            startActivityForResult(intent,101)
+        }
+        binding.btnAddProduct.setOnClickListener{
+            val intent = Intent(requireContext(), AddProductActivity::class.java)
+            startActivityForResult(intent,101)
         }
     }
 
@@ -48,10 +64,17 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
         }
     }
 
+    fun resetAdapter()
+    {
+        binding.recyclerView.adapter = adapterProductManager.apply {
+            this.data = listProduct()
+        }
+    }
+
     private fun listProduct(): MutableList<ProductManager> {
         val listData = mutableListOf<ProductManager>()
         FetchDataFirebase.share.listProduct.forEach {
-            listData.add(ProductManager(it.name!!, if (it.image != null)  it.image!! else "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png" ,it.price!!))
+            listData.add(ProductManager(it.id,it.name!!, if (it.image != null)  it.image!! else "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png" ,it.price!!))
         }
         return listData
     }

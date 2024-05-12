@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ProfileManagerFragment : BaseFragment<FragmentProfileManagerBinding>() {
 
-    lateinit var adapterUserManager: AdapterUserManager
+    var adapterUserManager: AdapterUserManager = AdapterUserManager()
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProfileManagerBinding
         get() = FragmentProfileManagerBinding::inflate
 
