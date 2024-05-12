@@ -45,7 +45,7 @@
         android:layout_marginStart="@dimen/spacing_10"
         style="@style/TextLayoutDescriptionStyleMedium"
         />
-    
+
     <ImageView
         android:layout_width="@dimen/button_size_16"
         android:layout_height="@dimen/button_size_16"

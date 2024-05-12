@@ -9,15 +9,12 @@
     tools:context=".features.main.cart.CartFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/layout_bottom"
         app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            android:id="@+id/layout_header"
-            layout="@layout/layout_header" />
 
         <include
             android:id="@+id/layout_cart"
@@ -31,9 +28,24 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            android:id="@+id/layout_bottom_checkout"
-            layout="@layout/layout_bottom_checkout" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bt_check_out"
+            style="@style/ButtonStyleMain"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginTop="@dimen/spacing_30"
+            android:layout_marginBottom="@dimen/spacing_30"
+            android:text="@string/text_checkout" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_not_found"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

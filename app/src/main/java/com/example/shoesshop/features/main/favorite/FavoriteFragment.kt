@@ -35,8 +35,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         click()
     }
 
-    private fun getUser()
-    {
+    private fun getUser() {
         val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
         user = FetchDataFirebase.share.getEmployeeById(idUser!!)
     }
@@ -52,7 +51,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                 listProduct.add(it)
             }
         }
-        //productAdapter.submitList(homeViewModel.listProductt)
         productAdapter.submitList(listProduct)
         productAdapter.notifyDataSetChanged()
     }

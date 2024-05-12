@@ -46,18 +46,21 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     private lateinit var productCartAdapter: ProductCartAdapter
 
     var listProductCartt: MutableList<CartProduct> = mutableListOf()
-    var listCard : ArrayList<CardUser> = ArrayList()
-    var total : Int =0;
-    var shipCod : Int = 50;
+    var listCard: ArrayList<CardUser> = ArrayList()
+    var total: Int = 0;
 
     override fun onViewCreated() {
         initAdapter()
+        setUpView()
         click()
     }
 
+    private fun setUpView() {
+        binding.layoutCart.tvTitle.visibility = View.GONE
+        binding.notFound.visibility = if (productCartViewModel.listProductCartt.isEmpty()) View.VISIBLE else View.GONE
+    }
+
     private fun initAdapter() {
-//        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-//        itemTouchHelper.attachToRecyclerView(binding.layoutCart.revCommon)
         productCartAdapter = ProductCartAdapter()
         RecyclerViewUtils.initAdapter(
             mAdapter = productCartAdapter,
@@ -65,27 +68,22 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         )
 
         val user = FetchDataFirebase.share.getCurrentUser()
-        if (user.listCard != null)
-        {
+        if (user.listCard != null) {
             listCard = user.listCard!!
             setListAdapter()
         }
     }
 
-    fun refreshCard()
-    {
+    fun refreshCard() {
         val user = FetchDataFirebase.share.getCurrentUser()
-        if (user.listCard != null)
-        {
+        if (user.listCard != null) {
             listCard = user.listCard!!
             setListAdapter()
         }
     }
 
-
-    private fun getProduct( id : Int?) :Product?  {
-        if (FetchDataFirebase.share.listProduct.isNotEmpty())
-        {
+    private fun getProduct(id: Int?): Product? {
+        if (FetchDataFirebase.share.listProduct.isNotEmpty()) {
             FetchDataFirebase.share.listProduct.forEach {
                 if (it.id == id) {
                     return it
@@ -105,21 +103,17 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         }
 
         productCartAdapter.onItemDeleteButtonClick = {
-            if (listCard.isNotEmpty())
-            {
-                val  item = getUserCard(it.product!!.id)
-                if (item != null)
-                {
-                    val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+            if (listCard.isNotEmpty()) {
+                val item = getUserCard(it.product!!.id)
+                if (item != null) {
+                    val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
                     FetchDataFirebase.share.getEmployeeById(idUser!!).let {
-                        if (it != null)
-                        {
+                        if (it != null) {
                             listCard.remove(item)
                             it.listCard = listCard
-                            FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
+                            FetchDataFirebase.share.UpdateUser(it, object : ActionCallback {
                                 override fun onActionComplete(isSuccess: Boolean) {
-                                    if (isSuccess)
-                                    {
+                                    if (isSuccess) {
                                         setListAdapter()
                                     }
                                 }
@@ -133,59 +127,50 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             }
         }
 
-        productCartAdapter.onItemAddButtonClick ={
+        productCartAdapter.onItemAddButtonClick = {
             val pro = it
-            if (listCard.isNotEmpty())
-            {
-                    val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
-                    FetchDataFirebase.share.getEmployeeById(idUser!!).let {
-                        if (it != null)
-                        {
-                            listCard.forEach{
-                                if (it.idPruduct == pro.product!!.id )
-                                {
-                                    it.total = it.total!! +1
-                                }
-
+            if (listCard.isNotEmpty()) {
+                val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+                FetchDataFirebase.share.getEmployeeById(idUser!!).let {
+                    if (it != null) {
+                        listCard.forEach {
+                            if (it.idPruduct == pro.product!!.id) {
+                                it.total = it.total!! + 1
                             }
-                            it.listCard = listCard
-                            FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
-                                override fun onActionComplete(isSuccess: Boolean) {
-                                    if (isSuccess)
-                                    {
-                                        setListAdapter()
-                                    }
-                                }
 
-                            })
                         }
+                        it.listCard = listCard
+                        FetchDataFirebase.share.UpdateUser(it, object : ActionCallback {
+                            override fun onActionComplete(isSuccess: Boolean) {
+                                if (isSuccess) {
+                                    setListAdapter()
+                                }
+                            }
+
+                        })
+                    }
                 }
             }
         }
 
         productCartAdapter.onItemSubButtonClick = {
             val pro = it
-            if (listCard.isNotEmpty())
-            {
-                val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+            if (listCard.isNotEmpty()) {
+                val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
                 FetchDataFirebase.share.getEmployeeById(idUser!!).let {
-                    if (it != null)
-                    {
-                        listCard.forEach{
-                            if (it.idPruduct == pro.product!!.id )
-                            {
-                                if (it.total!! > 1)
-                                {
-                                    it.total = it.total!! -1
+                    if (it != null) {
+                        listCard.forEach {
+                            if (it.idPruduct == pro.product!!.id) {
+                                if (it.total!! > 1) {
+                                    it.total = it.total!! - 1
                                 }
                             }
 
                         }
                         it.listCard = listCard
-                        FetchDataFirebase.share.UpdateUser(it,object :ActionCallback{
+                        FetchDataFirebase.share.UpdateUser(it, object : ActionCallback {
                             override fun onActionComplete(isSuccess: Boolean) {
-                                if (isSuccess)
-                                {
+                                if (isSuccess) {
                                     setListAdapter()
                                 }
                             }
@@ -197,16 +182,15 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         }
     }
 
-    fun  setListAdapter()
-    {
+    fun setListAdapter() {
         listProductCartt.clear()
         listCard.forEach {
             val pro = getProduct(it.idPruduct)
-            if (pro != null)
-            {
+            if (pro != null) {
                 listProductCartt.add(
                     CartProduct(
-                        Product(id = it.idPruduct!!, image = "", pro.name,
+                        Product(
+                            id = it.idPruduct!!, image = "", pro.name,
                             pro.price?.times(it.total!!)
                         ),
                         quantity = it.total
@@ -219,12 +203,10 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         productCartAdapter.submitList(listProductCartt)
         productCartAdapter.notifyDataSetChanged()
     }
-    private fun getUserCard(id:Int) : CardUser?
-    {
-        for (card in listCard)
-        {
-            if (id == card.idPruduct)
-            {
+
+    private fun getUserCard(id: Int): CardUser? {
+        for (card in listCard) {
+            if (id == card.idPruduct) {
                 return card
             }
         }
@@ -234,8 +216,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
     override fun initAction() {
 
-        binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
-            //it.navigateTo(R.id.action_cartFragment_to_cartDetailFragment)
+        binding.btCheckOut.setOnClickListener {
             val intent = Intent(requireContext(), DetailActivity::class.java)
             intent.putExtra(HomeActivity.REPLACE_DRAWER, 4)
             startActivity(intent)
@@ -305,7 +286,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                         isCurrentlyActive
                     )
                 }
-
             }
         }
 }

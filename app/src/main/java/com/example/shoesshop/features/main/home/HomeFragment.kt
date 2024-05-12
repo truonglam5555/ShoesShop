@@ -1,7 +1,10 @@
 package com.example.shoesshop.features.main.home
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshop.R
@@ -15,11 +18,13 @@ import com.example.shoesshop.features.main.activity.DetailActivity
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.home.adapter.CategoryAdapter
 import com.example.shoesshop.features.main.home.adapter.ProductAdapter
+import com.example.shoesshop.features.main.home.model.Category
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.model.Employee
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
+import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -39,6 +44,20 @@ companion object{
     override fun onViewCreated() {
         initAdapter()
         click()
+        searchView()
+
+    }
+
+    private fun searchView() {
+        binding.edtSearchView.clearFocus()
+        binding.edtSearchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
     }
 
     fun getUser()
@@ -150,14 +169,11 @@ companion object{
     }
 
     override fun initAction() {
-        binding.cardSearch.setOnClickListener {
-
-        }
     }
 
     override fun initView() {
         binding.layoutSelectCate.tvNext.hideView()
-        binding.layoutProduct.tvTitle.text = getString(R.string.text_popular_shoes_title)
+
 //        binding.layoutHeader.imgBack.hideView()
     }
 

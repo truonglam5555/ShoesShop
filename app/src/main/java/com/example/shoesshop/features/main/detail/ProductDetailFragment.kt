@@ -2,12 +2,10 @@ package com.example.shoesshop.features.main.detail
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
-import com.example.shoesshop.constants.RecyclerValue
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
@@ -17,10 +15,7 @@ import com.example.shoesshop.features.main.detail.adapter.ChooseColorProductAdap
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
-import com.example.shoesshop.utils.RecyclerViewUtils
-import com.example.shoesshop.utils.ViewUtils.hideView
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
@@ -36,44 +31,52 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     override fun onViewCreated() {
         adapterSize = AdapterSize(requireContext())
         initAdapter()
-//        click()
-        //initSize()
-        if (FetchDataFirebase.share.productSelect != null)
-        {
+        binding.layoutChooseColor.layoutTitleMenu2.visibility = View.GONE
+
+        if (FetchDataFirebase.share.productSelect != null) {
             setProduct(FetchDataFirebase.share.productSelect!!)
             adapterSize.subjectItem = {
                 sizeSelect = it
             }
-            binding.linLayout.setOnClickListener{
-                if (sizeSelect.isNotEmpty())
-                {
+            binding.linLayout.setOnClickListener {
+                if (sizeSelect.isNotEmpty()) {
 
                     val user = FetchDataFirebase.share.getCurrentUser()
-                    if (user.listCard.isNullOrEmpty())
-                    {
+                    if (user.listCard.isNullOrEmpty()) {
                         val listCard: ArrayList<CardUser> = ArrayList()
-                        listCard.add(CardUser(FetchDataFirebase.share.productSelect!!.id,sizeSelect.toDouble(),1))
-                        user.listCard =listCard
-                        FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                        listCard.add(
+                            CardUser(
+                                FetchDataFirebase.share.productSelect!!.id,
+                                sizeSelect.toDouble(),
+                                1
+                            )
+                        )
+                        user.listCard = listCard
+                        FetchDataFirebase.share.UpdateUser(user, object : ActionCallback {
                             override fun onActionComplete(isSuccess: Boolean) {
-                                if (isSuccess)
-                                {
-                                    Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                                if (isSuccess) {
+                                    Toast.makeText(
+                                        this@ProductDetailFragment.activity,
+                                        "add Success",
+                                        Toast.LENGTH_SHORT
+                                    )
                                 }
                             }
                         })
-                    }else{
+                    } else {
                         user.listCard!!.forEach {
-                            if (it.idPruduct == homeViewModel.product.value!!.id)
-                            {
-                                it.total = it.total!! +1;
+                            if (it.idPruduct == homeViewModel.product.value!!.id) {
+                                it.total = it.total!! + 1;
                             }
                         }
-                        FetchDataFirebase.share.UpdateUser(user,object :ActionCallback{
+                        FetchDataFirebase.share.UpdateUser(user, object : ActionCallback {
                             override fun onActionComplete(isSuccess: Boolean) {
-                                if (isSuccess)
-                                {
-                                    Toast.makeText(this@ProductDetailFragment.activity,"add Success",Toast.LENGTH_SHORT)
+                                if (isSuccess) {
+                                    Toast.makeText(
+                                        this@ProductDetailFragment.activity,
+                                        "add Success",
+                                        Toast.LENGTH_SHORT
+                                    )
                                 }
                             }
                         })
@@ -84,8 +87,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
     }
 
-    private fun setProduct(product: Product)
-    {
+    private fun setProduct(product: Product) {
         binding.tvName.text = product.name
         binding.tvType.text = product.type
         binding.tvPrice.text = "$${product.price}"
@@ -94,7 +96,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         initSize(product.sizes!!)
     }
 
-    private fun initSize(sizes : List<Double>) {
+    private fun initSize(sizes: List<Double>) {
         binding.apply {
             recyclerViewSize.adapter = adapterSize.apply {
                 //this.data = getData().toMutableList()

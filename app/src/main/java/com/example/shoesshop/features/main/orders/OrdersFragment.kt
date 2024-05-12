@@ -36,6 +36,7 @@ class OrdersFragment : BaseFragment<FragmentOrdersBinding>() {
             val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
             transaction.replace(R.id.fragmentContainerView, DetailOrderFragment())
+            transaction.addToBackStack(null)
             transaction.commit()
         }
     }

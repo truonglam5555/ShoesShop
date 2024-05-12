@@ -155,7 +155,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         when (p0.itemId) {
             R.id.user -> onStartActivity(R.id.user)
             R.id.order -> onStartActivity(R.id.order)
-            R.id.setting -> onStartActivity(R.id.setting)
+//            R.id.setting -> onStartActivity(R.id.setting)
             R.id.sign_out -> onLogoutAccount()
         }
         binding.drawLayout.closeDrawer(GravityCompat.START)

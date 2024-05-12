@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_shoe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/spacing_13"
     android:layout_weight="1"
-    android:id="@+id/item_shoe"
     android:background="@color/background_view_color"
     android:orientation="horizontal">
 
@@ -14,12 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/spacing_13"
-        android:paddingTop="@dimen/spacing_13"
-        android:paddingBottom="@dimen/spacing_13"
         android:layout_weight="0.8"
         android:background="@drawable/cart_background_quatity"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:paddingTop="@dimen/spacing_13"
+        android:paddingBottom="@dimen/spacing_13"
+        android:visibility="visible"
         android:weightSum="3">
 
         <ImageView
@@ -31,7 +32,7 @@
             android:padding="@dimen/spacing_10"
             android:scaleX="1.7"
             android:scaleY="1.7"
-            android:src="@drawable/ic_add" />
+            android:src="@drawable/ic_add_product" />
 
         <TextView
             android:id="@+id/tv_quantity"
@@ -65,28 +66,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_13"
-        android:paddingTop="@dimen/spacing_13"
-        android:paddingBottom="@dimen/spacing_13"
         android:layout_marginEnd="@dimen/spacing_13"
         android:layout_weight="0.2"
-
-        android:background="@drawable/cart_background_view">
+        android:background="@drawable/cart_background_view"
+        android:paddingTop="@dimen/spacing_13"
+        android:paddingBottom="@dimen/spacing_13">
 
         <ImageView
             android:id="@+id/img_product"
             android:layout_width="@dimen/button_size_70"
             android:layout_height="@dimen/button_size_70"
             android:layout_marginStart="@dimen/spacing_10"
-            android:src="@drawable/_img_shoe_1"
             android:scaleType="centerCrop"
+            android:src="@drawable/_img_shoe_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_15"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -115,6 +117,23 @@
                 android:textColor="@color/black_1"
                 android:textSize="@dimen/text_size_13" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="Size: 41"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.179"
+            app:layout_constraintStart_toEndOf="@+id/img_product"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -123,9 +142,9 @@
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/spacing_13"
         android:layout_weight="0.7"
+        android:background="@drawable/cart_background_delete"
         android:paddingTop="@dimen/spacing_13"
         android:paddingBottom="@dimen/spacing_13"
-        android:background="@drawable/cart_background_delete"
         android:visibility="gone">
 
         <ImageView

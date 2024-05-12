@@ -22,58 +22,6 @@ class HomeViewModel : ViewModel() {
         return listCate
     }
 
-    fun getListProduct(): MutableList<Product> {
-        listProductt.add(
-            Product(
-                1, "", "Nike Jordan 1", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        listProductt.add(
-            Product(
-                2, "", "Nike Jordan 2", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        listProductt.add(
-            Product(
-                3, "", "Nike Jordan 3", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        listProductt.add(
-            Product(
-                4, "", "Nike Jordan 4", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        listProductt.add(
-            Product(
-                5, "", "Nike Jordan 5", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        listProductt.add(
-            Product(
-                6, "", "Nike Jordan 6", 302.00, false, isBestSeller = true, img_list = listOf(
-                    R.drawable._img_shoe_1, R.drawable._img_shoe_2, R.drawable.img_placeholder
-                )
-            )
-        )
-        return listProductt
-    }
-
-    fun clearCheck(id: Int) {
-        for (i in listCate.indices)
-            if (listCate[i].id != id)
-                listCate[i].isChecked = false
-    }
-
     fun clearCheckAllCategory() {
         for (i in listCate.indices) {
             listCate[i].isChecked = false

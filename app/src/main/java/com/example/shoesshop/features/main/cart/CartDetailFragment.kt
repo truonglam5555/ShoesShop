@@ -22,9 +22,12 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
 
     var userData: Employee? = null
     var total : Int =0;
-    var shipCod : Int = 50;
+    var shipCod : Int = 15;
     override fun onViewCreated() {
+        binding.layoutNumber.icInfo.setImageResource(R.drawable.ic_call_phone)
+        binding.layoutNumber.tvInfoName.text = "Phone"
 
+        binding.layoutNumber.tvInfoName.text = "Phone"
     }
 
     fun getUserAndData()
@@ -62,9 +65,6 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
             btText = getString(R.string.text_back_to_shopping)
         )
 
-        binding.layoutHeader.imgBack.setOnClickListener {
-           this@CartDetailFragment.activity?.finish()
-        }
 
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
             val user = FetchDataFirebase.share.getCurrentUser()

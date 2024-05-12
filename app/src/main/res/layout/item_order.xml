@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_10sdp"
@@ -10,6 +11,7 @@
     android:background="@color/background_view_color"
     android:orientation="horizontal">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,12 +20,34 @@
         android:paddingBottom="@dimen/spacing_13"
         android:layout_marginEnd="@dimen/spacing_13"
         android:layout_weight="0.2"
-
         android:background="@drawable/cart_background_view">
 
+        <TextView
+            android:id="@+id/id_order"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="Order#123213"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/green"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:text="Confirm"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <ImageView
             android:id="@+id/img_product"
             android:layout_width="@dimen/button_size_70"
+            android:layout_marginTop="@dimen/_25sdp"
             android:layout_height="@dimen/button_size_70"
             android:layout_marginStart="@dimen/spacing_10"
             android:src="@drawable/_img_shoe_1"
@@ -36,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_15"
+            android:layout_marginTop="@dimen/_15sdp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
