@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_bill_oder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/spacing_13"
+    android:layout_weight="1"
+    android:background="@color/background_view_color"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_13"
+        android:paddingBottom="@dimen/spacing_13"
+        android:background="@drawable/cart_background_view">
+        <LinearLayout
+            android:paddingStart="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:paddingRight="@dimen/_10sdp"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_id_bill"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:text="Order #20025"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+               <androidx.cardview.widget.CardView
+                   android:id="@+id/cart_point"
+                   android:layout_gravity="center"
+                   app:cardCornerRadius="@dimen/_4sdp"
+                   android:layout_width="@dimen/_8sdp"
+                   android:layout_height="@dimen/_8sdp"
+                   android:layout_marginRight="@dimen/_5sdp"
+                   app:cardBackgroundColor="@color/black"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_status"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"/>
+            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_poup_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/im_dots_horizontal"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/TextLayoutBasicStyle"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:id="@+id/tv_datetime"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#99999F"
+            android:text="12/05/2024 10:00"
+            />
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:background="#F2F2F3"
+             android:layout_marginBottom="@dimen/_10sdp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_15"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/img_product"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    style="@style/TextLayoutBasicStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Nike Club Max"
+                    android:textColor="@color/black_1"
+                    android:textSize="@dimen/text_size_13" />
+
+                <TextView
+                    android:id="@+id/tv_user_email"
+                    style="@style/TextLayoutBasicStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="2 products"
+                    android:textColor="@color/black_1"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/tv_bill_total"
+                style="@style/TextLayoutBasicStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="$814.15"
+                android:textColor="@color/black_1"
+                android:textSize="@dimen/text_size_20"
+                android:layout_marginRight="@dimen/_10sdp"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

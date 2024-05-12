@@ -13,6 +13,7 @@ import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentLoginBinding
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.admin.HomeManagerActivity
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.Employee
@@ -39,19 +40,35 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
 
         binding.btLogin.setOnClickListener {
-            FetchDataFirebase.share.auth.signInWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
-                if (it.user != null)
+            //
+            if (binding.layoutEmail.edtEmail.text.toString().contains("admind"))
+            {
+               val user = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
+                if (user != null && user.pass == binding.layoutPassword.edtPassword.text.toString())
                 {
-                    val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
-                    user!!.id?.let { value ->
-                        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+                    MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, user.id!!).let {
+                        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyAdmin, user.id!!).let {
+                            requireActivity().finish()
+                            requireActivity().startActivity(Intent(requireActivity(), HomeManagerActivity::class.java))
+                        }
                     }
-                    requireActivity().finish()
-                    requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
                 }
-            }.addOnFailureListener{
-                Log.d("Login",it.message.toString())
+            }else{
+                FetchDataFirebase.share.auth.signInWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
+                    if (it.user != null)
+                    {
+                        val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
+                        user!!.id?.let { value ->
+                            MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+                        }
+                        requireActivity().finish()
+                        requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                    }
+                }.addOnFailureListener{
+                    Log.d("Login",it.message.toString())
+                }
             }
+
 //            val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString());
 //            if (user != null && user.pass == binding.layoutPassword.edtPassword.text.toString())
 //            {

@@ -10,7 +10,10 @@ import com.example.shoesshop.NoScrollViewPagerAdapter
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseActivity
 import com.example.shoesshop.common.extension.clickWithAnimationDebounce
+import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.ActivityMainBinding
+import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.auth.AuthActivity
 import com.example.shoesshop.features.main.cart.CartFragment
 import com.example.shoesshop.features.main.favorite.FavoriteFragment
 import com.example.shoesshop.features.main.home.HomeFragment
@@ -163,7 +166,10 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun onLogoutAccount() {
-
+        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser,"").let {
+            val intent = Intent(this@HomeActivity, AuthActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun onStartActivity(viewId: Int) {

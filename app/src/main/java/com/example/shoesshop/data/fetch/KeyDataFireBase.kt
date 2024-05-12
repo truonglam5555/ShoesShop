@@ -6,6 +6,7 @@ import com.google.firebase.ktx.Firebase
 class KeyDataFireBase {
     companion object{
         val keyUser ="user"
+        val keyAdmin ="admin"
         val keyListCard = "listCard"
         val keyListLike = "listLike"
         val keyProduct = "products"
