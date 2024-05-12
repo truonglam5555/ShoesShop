@@ -1,15 +1,10 @@
 package com.example.shoesshop.features.admin.profile
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.databinding.FragmentProfileManagerBinding
-import com.example.shoesshop.features.admin.product.DetailProductManagerActivity
 import com.example.shoesshop.model.Employee
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

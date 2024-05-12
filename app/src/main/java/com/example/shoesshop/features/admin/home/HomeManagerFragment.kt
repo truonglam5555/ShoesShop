@@ -1,10 +1,15 @@
 package com.example.shoesshop.features.admin.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.common.extension.clickWithAnimationDebounce
 import com.example.shoesshop.data.fetch.FetchDataFirebase
+import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentHomeManagerBinding
+import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.auth.AuthActivity
 
 class HomeManagerFragment : BaseFragment<FragmentHomeManagerBinding>() {
     override fun initAction() {
@@ -12,6 +17,13 @@ class HomeManagerFragment : BaseFragment<FragmentHomeManagerBinding>() {
     }
 
     override fun initView() {
+        binding.tvLogOut.clickWithAnimationDebounce{
+            MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser,"").let {
+                val intent = Intent(requireContext(), AuthActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
     }
 
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentHomeManagerBinding
