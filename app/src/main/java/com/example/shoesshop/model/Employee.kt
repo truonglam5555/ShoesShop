@@ -1,5 +1,7 @@
 package com.example.shoesshop.model
 
+import java.io.Serializable
+
 class Employee(
     var id: String? = null,
     var fullName: String? = null,
@@ -11,4 +13,4 @@ class Employee(
     val isadmid : Int = 0,
     var  listCard : ArrayList<CardUser>? = null,
     var  listLike : ArrayList<Int>? = null
-)
+):Serializable

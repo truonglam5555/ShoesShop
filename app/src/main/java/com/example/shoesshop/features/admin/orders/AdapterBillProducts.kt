@@ -1,5 +1,6 @@
 package com.example.shoesshop.features.admin.orders
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ class AdapterBillProducts (context :  Context): BaseAdapter<Product, ItemBillPro
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> ItemBillProductBinding
         get() = ItemBillProductBinding::inflate
 
+    @SuppressLint("StringFormatMatches")
     override fun bindItem(item: Product, binding: ItemBillProductBinding, position: Int) {
         binding.tvProductName.text = item.name
         binding.imgProduct.setImage(item.img_list!!.first())
