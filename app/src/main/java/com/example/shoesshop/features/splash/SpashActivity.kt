@@ -10,6 +10,7 @@ import com.example.shoesshop.constants.DataShared
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.ActivitySplashBinding
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.admin.HomeManagerActivity
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.welcome.WelcomeActivity
 
@@ -38,9 +39,15 @@ class SpashActivity() : BaseActivity<ActivitySplashBinding>(ActivitySplashBindin
 
         android.os.Handler().postDelayed({
             val data =   MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+            val admin =   MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyAdmin)
             if (data != null && data!!.isNotEmpty())
             {
-                startActivity(Intent(this, HomeActivity::class.java))
+                if (!admin.isNullOrEmpty())
+                {
+                    startActivity(Intent(this, HomeManagerActivity::class.java))
+                }else{
+                    startActivity(Intent(this, HomeActivity::class.java))
+                }
             }else{
                 startActivity(Intent(this, WelcomeActivity::class.java))
             }
