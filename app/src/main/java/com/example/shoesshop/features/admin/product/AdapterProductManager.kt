@@ -13,7 +13,7 @@ import javax.inject.Inject
 class AdapterProductManager @Inject constructor() : BaseAdapter<ProductManager, ItemProductManagerBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> ItemProductManagerBinding
         get() = ItemProductManagerBinding::inflate
-    var subjectMenu: ((view: View) -> Unit)? = null
+    var subjectRemove: ((obj: ProductManager) -> Unit)? = null
     var subjectItem: ((obj: ProductManager) -> Unit)? = null
 
     override fun bindItem(item: ProductManager, binding: ItemProductManagerBinding, position: Int) {
@@ -21,10 +21,10 @@ class AdapterProductManager @Inject constructor() : BaseAdapter<ProductManager, 
             imgShoes.setImageURI(Uri.parse(item.urlImage))
             tvPrice.text = "$${item.price}"
             tvName.text = item.name
-            icOption.clickWithAnimationDebounce {
-                subjectMenu?.invoke(binding.icOption)
+            icRemove.clickWithAnimationDebounce {
+                subjectRemove?.invoke(item)
             }
-            cardViewStock.clickWithAnimationDebounce {
+            cardViewItem.clickWithAnimationDebounce {
                 subjectItem?.invoke(item)
             }
         }

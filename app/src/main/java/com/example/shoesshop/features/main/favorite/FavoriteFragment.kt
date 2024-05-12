@@ -27,7 +27,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     private lateinit var productAdapter: ProductAdapter
 
-    private var user : Employee? = null
+    private var user: Employee? = null
 
     override fun onViewCreated() {
         getUser()
@@ -36,18 +36,16 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     }
 
     private fun getUser() {
-        val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+        val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
         user = FetchDataFirebase.share.getEmployeeById(idUser!!)
     }
 
-    fun refreshAdepter()
-    {
+    fun refreshAdepter() {
         getUser()
         val listProduct = ArrayList<Product>()
         FetchDataFirebase.share.listProduct.forEach {
-            val isID =  getIdlikeById(it.id)
-            if (isID != null)
-            {
+            val isID = getIdlikeById(it.id)
+            if (isID != null) {
                 listProduct.add(it)
             }
         }
@@ -82,9 +80,8 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
         val listProduct = ArrayList<Product>()
         FetchDataFirebase.share.listProduct.forEach {
-            val isID =  getIdlikeById(it.id)
-            if (isID != null)
-            {
+            val isID = getIdlikeById(it.id)
+            if (isID != null) {
                 listProduct.add(it)
             }
         }
@@ -103,8 +100,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     }
 
     private fun getIdlikeById(iDD: Int): Int? {
-        if (user!!.listLike != null && user!!.listLike!!.isNotEmpty())
-        {
+        if (user!!.listLike != null && user!!.listLike!!.isNotEmpty()) {
             for (id in user!!.listLike!!) {
                 if (id == iDD) {
                     return id

@@ -3,6 +3,7 @@ package com.example.shoesshop.features.main.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.MenuItem
+import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
@@ -60,11 +61,13 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 if (viewPager.currentItem != 1) viewPager.setCurrentItem(1, true)
                 frmFav.refreshAdepter()
                 tvTab.text = getString(R.string.tv_favorite)
+                icIsNoti.visibility = View.GONE
                 tvTabFav.text = getString(R.string.tv_favorite)
                 icMessage.setImageResource(R.drawable.ic_fav_unchecked)
             }
             viewTabCart.clickWithAnimationDebounce {
                 if (viewPager.currentItem != 2) viewPager.setCurrentItem(2, true)
+                icIsNoti.visibility = View.GONE
                 frmCart.refreshCard()
                 tvTab.text = getString(R.string.tv_my_cart)
                 tvTabTabCart.text = getString(R.string.tv_my_cart)
@@ -73,6 +76,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
             viewTabNotifi.clickWithAnimationDebounce {
                 if (viewPager.currentItem != 3) viewPager.setCurrentItem(3, true)
+                icIsNoti.visibility = View.GONE
                 tvTab.text = getString(R.string.tv_notification)
                 tvTabNotifi.text = getString(R.string.tv_notification)
                 icMessage.setImageResource(R.drawable.ic_notification_unchecked)

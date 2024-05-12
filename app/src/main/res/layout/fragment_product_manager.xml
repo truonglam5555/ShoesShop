@@ -26,10 +26,11 @@
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_gravity="center"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center|bottom"
             android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_product" />
 
@@ -38,8 +39,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/inter_bold"
-            android:gravity="center"
+            android:gravity="center|bottom"
             android:text="Product"
             android:textSize="@dimen/_19sdp" />
 
@@ -48,7 +50,8 @@
             android:id="@+id/ic_message"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
-            android:layout_gravity="end|center"
+            android:layout_gravity="end|center|bottom"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:importantForAccessibility="no"

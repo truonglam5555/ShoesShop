@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:id="@+id/cardViewItem"
         android:orientation="vertical"
         app:cardCornerRadius="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,14 +47,14 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/inter_bold"
                 android:text="Nike Air Max 270"
-                android:textSize="@dimen/_17ssp" />
+                android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:id="@+id/ic_option"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:id="@+id/ic_remove"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
                 android:layout_margin="@dimen/_5sdp"
-                android:src="@drawable/ic_option" />
+                android:src="@drawable/ic_remove" />
 
         </LinearLayout>
 
@@ -62,8 +62,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_75sdp"
             android:layout_gravity="bottom"
             android:orientation="horizontal">
 
@@ -85,8 +84,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold"
                 android:text="$58.6"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:textSize="@dimen/_18ssp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:textSize="@dimen/_16ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

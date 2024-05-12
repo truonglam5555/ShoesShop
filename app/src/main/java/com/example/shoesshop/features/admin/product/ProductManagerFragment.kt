@@ -1,11 +1,13 @@
 package com.example.shoesshop.features.admin.product
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductManagerBinding
 import com.example.shoesshop.databinding.FragmentProfileManagerBinding
+import com.example.shoesshop.features.admin.orders.DetailBillodersActivity
 import com.example.shoesshop.model.ProductManager
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,7 +26,14 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
     }
 
     override fun initAction() {
-
+        adapterProductManager.subjectRemove ={
+            //remove here
+        }
+        adapterProductManager.subjectItem ={
+            val intent = Intent(requireContext(), DetailProductManagerActivity::class.java)
+            intent.putExtra("idProduct", it)
+            startActivity(intent)
+        }
     }
 
     override fun initView() {
@@ -44,8 +53,6 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
         FetchDataFirebase.share.listProduct.forEach {
             listData.add(ProductManager(it.name!!, if (it.image != null)  it.image!! else "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png" ,it.price!!))
         }
-//        val listData = mutableListOf<ProductManager>()
-//        listData.add(ProductManager("Nike 200202", "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png",79.5))
         return listData
     }
 }

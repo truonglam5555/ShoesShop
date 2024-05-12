@@ -20,14 +20,15 @@
             android:id="@+id/profile_admin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/_10sdp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="@dimen/_50sdp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_height="@dimen/_50sdp"
-                android:layout_margin="@dimen/_1sdp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_profile" />
 
@@ -38,6 +39,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_marginTop="@dimen/_25sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter"
@@ -49,8 +51,9 @@
                     android:id="@+id/tv_tab"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:fontFamily="@font/inter_bold"
-                    android:gravity="center"
+                    android:gravity="bottom"
                     android:text="David Andrew"
                     android:textSize="@dimen/_19sdp" />
 
@@ -316,7 +319,7 @@
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
-                        android:src="@drawable/ic_order_accept" />
+                        android:src="@drawable/ic_order_cancel" />
 
                     <TextView
                         android:layout_width="match_parent"
