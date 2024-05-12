@@ -66,7 +66,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 //                Log.d("Login",user.toString())
 //            }
         }
-        addProductTest()
+        //addProductTest()
     }
 
     private fun addAdmindData() {

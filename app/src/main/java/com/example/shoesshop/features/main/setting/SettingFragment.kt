@@ -14,7 +14,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     }
 
     override fun initAction() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun initView() {
