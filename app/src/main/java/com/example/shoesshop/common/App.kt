@@ -8,6 +8,7 @@ class App : Application(), LifecycleObserver {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var app: App
+
     }
 
     init {

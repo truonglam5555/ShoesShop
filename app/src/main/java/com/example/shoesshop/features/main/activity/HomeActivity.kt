@@ -173,6 +173,7 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser,"").let {
             val intent = Intent(this@HomeActivity, AuthActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
