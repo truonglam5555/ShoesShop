@@ -286,7 +286,8 @@ class FetchDataFirebase {
     }
 
     fun deleteProducts(item: Product, callback: ActionCallback) {
-        dataUser.child(item.id.toString()).removeValue().addOnSuccessListener {
+        Log.d("Item",item.id.toString())
+        dataProduct.child(item.id.toString()).removeValue().addOnSuccessListener {
             callback.onActionComplete(true)
         }.addOnFailureListener {
             callback.onActionComplete(false)
@@ -294,8 +295,8 @@ class FetchDataFirebase {
     }
 
     fun UpdateProduct(item: Product, callback: ActionCallback) {
-        dataUser.child(item.id.toString()).removeValue().let {
-            dataUser.child(item.id.toString()).setValue(item).addOnSuccessListener {
+        dataProduct.child(item.id.toString()).removeValue().let {
+            dataProduct.child(item.id.toString()).setValue(item).addOnSuccessListener {
                 callback.onActionComplete(true)
             }.addOnFailureListener {
                 callback.onActionComplete(false)
