@@ -23,8 +23,8 @@ class AddProductActivity :
     private val listPhoto: MutableList<String> = mutableListOf()
 
     lateinit var adapterPhoto: AdapterPhoto
-
-    lateinit var adapterSize: AdapterSize
+    private val listSize : ArrayList<Double> = ArrayList()
+    lateinit var adapterSize: AdapterSizeProductDelete
 
     companion object {
         private const val REQUEST_CODE_PERMISSIONS = 101
@@ -34,12 +34,13 @@ class AddProductActivity :
     override fun onCreateView() {
         super.onCreateView()
         adapterPhoto = AdapterPhoto(this@AddProductActivity)
-        adapterSize = AdapterSize(this@AddProductActivity)
+        adapterSize = AdapterSizeProductDelete()
         initViews()
     }
 
     private fun initViews() {
         setUpRecyclerPhoto()
+        setLietener()
     }
 
     private fun setUpRecyclerPhoto() {
@@ -63,6 +64,17 @@ class AddProductActivity :
 //            }
             adapterPhoto.notifyItemRemoved(it)
             adapterPhoto.init(listPhoto)
+        }
+    }
+
+    private fun resetAdapterSize()
+    {
+        binding.recyclerView.adapter = adapterSize.apply {
+            this.data = listSize.map { it }.toMutableList()
+        }
+        adapterSize.sizeRemove = {
+            listSize.remove(it)
+            resetAdapterSize()
         }
     }
 
@@ -92,23 +104,46 @@ class AddProductActivity :
     }
 
 
-    fun addProduct() {
-        val item = Product(
-            id = FetchDataFirebase.share.listProduct.size,
-            name = "",
-            image = "",
-            price = 0.0,
-            isFav = false, // thêm vào size và ....
-        )
-        FetchDataFirebase.share.addProduct(item, object : ActionCallback {
-            override fun onActionComplete(isSuccess: Boolean) {
-                if (isSuccess) {
-                    // to do
-                    // reset before Page
-                } else {
-                    // .....
-                }
+    fun setLietener() {
+        binding.btnAddProductDone.setOnClickListener {
+            if (binding.edtProduct.editText!!.text.toString().isNotEmpty() &&
+                binding.edtProductType.editText!!.text.isNotEmpty() &&
+                binding.edtDiscription.editText!!.text.toString()
+                    .isNotEmpty() && binding.edtPrice.editText!!.text.toString().isNotEmpty()
+                && listSize.isNotEmpty()
+            ) {
+                val item = Product(
+                    id = FetchDataFirebase.share.listProduct.size,
+                    name = binding.edtProduct.editText!!.text.toString(),
+                    image = "",
+                    price = binding.edtPrice.editText!!.text.toString().toDouble(),
+                    isFav = false,
+                    description = binding.edtDiscription.editText!!.text.toString(),
+                    isBestSeller = false,
+                    type = binding.edtProductType.editText!!.text.toString(),
+                    sizes = listSize
+                )
+                FetchDataFirebase.share.addProduct(item, object : ActionCallback {
+                    override fun onActionComplete(isSuccess: Boolean) {
+                        if (isSuccess) {
+                            setResult(101)
+                            this@AddProductActivity.finish()
+                        } else {
+
+                        }
+                    }
+                })
             }
-        })
+        }
+        binding.btnAddSize.setOnClickListener {
+            if (binding.edtSize.editText!!.text.toString().isNotEmpty() && binding.edtSize.editText!!.text.toString().length >= 2)
+            {
+
+                listSize.add(binding.edtSize.editText!!.text.toString().toDouble())
+                binding.edtSize.editText!!.setText("")
+                resetAdapterSize()
+
+            }
+        }
     }
 }
