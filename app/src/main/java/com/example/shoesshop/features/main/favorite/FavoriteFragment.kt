@@ -26,6 +26,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         get() = FragmentFavoriteBinding::inflate
 
     private lateinit var productAdapter: ProductAdapter
+    val listProduct = ArrayList<Product>()
 
     private var user: Employee? = null
 
@@ -42,7 +43,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     fun refreshAdepter() {
         getUser()
-        val listProduct = ArrayList<Product>()
         FetchDataFirebase.share.listProduct.forEach {
             val isID = getIdlikeById(it.id)
             if (isID != null) {
@@ -99,16 +99,16 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     }
 
-    private fun getIdlikeById(iDD: Int): Int? {
-        if (user!!.listLike != null && user!!.listLike!!.isNotEmpty()) {
-            for (id in user!!.listLike!!) {
-                if (id == iDD) {
-                    return id
+    private fun getIdlikeById(iDD: Int?): Int? {
+        var iDItem : Int? = null
+        if (user?.listLike != null && !user?.listLike.isNullOrEmpty()) {
+            user?.listLike?.forEach {
+                if (it == iDD) {
+                    iDItem = it
                 }
             }
         }
-
-        return null
+        return iDItem
     }
 
 }

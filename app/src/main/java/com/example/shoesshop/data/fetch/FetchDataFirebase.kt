@@ -32,6 +32,7 @@ class FetchDataFirebase {
     lateinit var dataProduct: DatabaseReference
     lateinit var dataBillOder: DatabaseReference
     lateinit var dataChats: DatabaseReference
+//    lateinit var listImage: DatabaseReference
     private var userChat: MessageUser? = null
     private var listUserChat: ArrayList<MessageUser> = ArrayList()
     var productSelect: Product? = null

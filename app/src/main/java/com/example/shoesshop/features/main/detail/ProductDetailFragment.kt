@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.constants.RecyclerValue
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
@@ -15,6 +17,8 @@ import com.example.shoesshop.features.main.detail.adapter.ChooseColorProductAdap
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
+import com.example.shoesshop.utils.RecyclerViewUtils
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,11 +31,12 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
         get() = FragmentProductDetailBinding::inflate
 
-    private lateinit var chooseColorProductAdapter: ChooseColorProductAdapter
+//    private lateinit var chooseColorProductAdapter: ChooseColorProductAdapter
 
     override fun onViewCreated() {
         adapterSize = AdapterSize(requireContext())
-        initAdapter()
+//        initAdapter()
+//        click()
         binding.layoutChooseColor.layoutTitleMenu2.visibility = View.GONE
 
         if (FetchDataFirebase.share.productSelect != null) {
@@ -106,21 +111,18 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         }
     }
 
-    private fun getData(): List<String> {
-        return listOf("38", "39", "40", "41", "42", "43")
-    }
-
-    private fun initAdapter() {
-        ///// 3 imageView here
-//        chooseColorProductAdapter =
-//            ChooseColorProductAdapter(homeViewModel.product.value?.img_list as MutableList<Int>)
+//    private fun initAdapter() {
+//        ///// 3 imageView here
+//        chooseColorProductAdapter = FetchDataFirebase.share.listProduct.forEach {
+//            it.img_list
+//        }
 //        RecyclerViewUtils.initAdapter(
 //            mAdapter = chooseColorProductAdapter,
 //            rev = binding.layoutChooseColor.revCommon,
 //            orientation = LinearLayoutManager.HORIZONTAL,
 //            type = RecyclerValue.LINEAR_LAYOUT_MANAGER
 //        )
-    }
+//    }
 //
 //    private fun click() {
 //        chooseColorProductAdapter.onItemClick = {

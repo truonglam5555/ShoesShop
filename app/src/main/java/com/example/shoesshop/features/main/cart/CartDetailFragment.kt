@@ -1,5 +1,6 @@
 package com.example.shoesshop.features.main.cart
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -11,6 +12,8 @@ import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.FragmentCartDetailBinding
 import com.example.shoesshop.datastore.MySharedPreferences
+import com.example.shoesshop.features.admin.HomeManagerActivity
+import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.BillOder
 import com.example.shoesshop.model.Employee
@@ -94,7 +97,7 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
                                     popupSuccess.show(childFragmentManager, "")
 
                                     popupSuccess.onCallback = {
-                                        findNavController().popBackStack(R.id.homeFragment, false)
+                                        requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
                                     }
                                 }
                             }
@@ -106,7 +109,7 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         }
 
         popupSuccess.onCallback = {
-            findNavController().popBackStack(R.id.homeFragment, false)
+            requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
         }
     }
 
