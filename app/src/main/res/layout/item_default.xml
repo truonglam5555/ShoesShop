@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewAddImg"
+    android:layout_width="@dimen/_50sdp"
+    android:background="@drawable/custom_bg_item_photo"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_height="@dimen/_50sdp">
+
+    <ImageView
+        android:id="@+id/imgLabelItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_defaul" />
+</RelativeLayout>

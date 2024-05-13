@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
+import com.example.shoesshop.common.extension.clickWithAnimationDebounce
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
@@ -21,8 +22,8 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         get() = FragmentCartDetailBinding::inflate
 
     var userData: Employee? = null
-    var total : Int =0;
-    var shipCod : Int = 15;
+    var total: Int = 0;
+    var shipCod: Int = 15;
     override fun onViewCreated() {
         binding.layoutNumber.icInfo.setImageResource(R.drawable.ic_call_phone)
         binding.layoutNumber.tvInfoName.text = "Phone"
@@ -30,9 +31,8 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         binding.layoutNumber.tvInfoName.text = "Phone"
     }
 
-    fun getUserAndData()
-    {
-        val idUser =  MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+    fun getUserAndData() {
+        val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
         userData = FetchDataFirebase.share.getEmployeeById(idUser!!)
         if (userData?.listCard != null) {
             userData?.listCard!!.forEach {
@@ -44,22 +44,24 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         }
     }
 
-    private fun getProduct( id : Int?) :Product?  {
-        if (FetchDataFirebase.share.listProduct.isNotEmpty())
-        {
+    private fun getProduct(id: Int?): Product? {
+        if (FetchDataFirebase.share.listProduct.isNotEmpty()) {
             FetchDataFirebase.share.listProduct.forEach {
-                if (it.id == id)
-                {
+                if (it.id == id) {
                     return it
                 }
             }
         }
-
-        return  null
+        return null
     }
 
     override fun initAction() {
-
+        binding.layoutNumber.icEdit.clickWithAnimationDebounce {
+//            inputPhone()
+        }
+        binding.icEdit.clickWithAnimationDebounce {
+//            inputAdress()
+        }
         val popupSuccess = BasePopupSuccessFragment(
             title = getString(R.string.text_your_payment_is_successful),
             btText = getString(R.string.text_back_to_shopping)
@@ -69,21 +71,27 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
             val user = FetchDataFirebase.share.getCurrentUser()
             val curentTime = System.currentTimeMillis();
-            val checkOut = BillOder(FetchDataFirebase.share.dataBillOder.push().key!!,user.id!!, curentTime,0,curentTime,shipCod,user.listCard!!)
+            val checkOut = BillOder(
+                FetchDataFirebase.share.dataBillOder.push().key!!,
+                user.id!!,
+                curentTime,
+                0,
+                curentTime,
+                shipCod,
+                user.listCard!!
+            )
             user.listCard = ArrayList()
-            FetchDataFirebase.share.UpdateUser(user,object : ActionCallback{
+            FetchDataFirebase.share.UpdateUser(user, object : ActionCallback {
                 override fun onActionComplete(isSuccess: Boolean) {
-                    if (isSuccess)
-                    {
-                        FetchDataFirebase.share.addCheckOut(checkOut,object : ActionCallback{
+                    if (isSuccess) {
+                        FetchDataFirebase.share.addCheckOut(checkOut, object : ActionCallback {
                             override fun onActionComplete(isSuccess: Boolean) {
-                                if (isSuccess)
-                                {
+                                if (isSuccess) {
                                     val popupSuccess = BasePopupSuccessFragment(
                                         title = getString(R.string.text_your_payment_is_successful),
                                         btText = getString(R.string.text_back_to_shopping)
                                     )
-                                    popupSuccess.show(childFragmentManager,"")
+                                    popupSuccess.show(childFragmentManager, "")
 
                                     popupSuccess.onCallback = {
                                         findNavController().popBackStack(R.id.homeFragment, false)
@@ -107,6 +115,6 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         binding.layoutHeader.tvTitle.text = getString(R.string.text_my_cart)
         binding.layoutBottomCheckout.tvSubtotal.text = "$$total"
         binding.layoutBottomCheckout.tvDelivery.text = "$$shipCod"
-        binding.layoutBottomCheckout.tvTotalCost.text ="$" + (total + shipCod)
+        binding.layoutBottomCheckout.tvTotalCost.text = "$" + (total + shipCod)
     }
 }

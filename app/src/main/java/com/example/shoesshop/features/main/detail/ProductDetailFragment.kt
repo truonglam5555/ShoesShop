@@ -16,6 +16,7 @@ import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
@@ -57,9 +58,9 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                                 if (isSuccess) {
                                     Toast.makeText(
                                         this@ProductDetailFragment.activity,
-                                        "add Success",
+                                        "Add Success",
                                         Toast.LENGTH_SHORT
-                                    )
+                                    ).show()
                                 }
                             }
                         })
@@ -74,9 +75,9 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                                 if (isSuccess) {
                                     Toast.makeText(
                                         this@ProductDetailFragment.activity,
-                                        "add Success",
+                                        "Add Success",
                                         Toast.LENGTH_SHORT
-                                    )
+                                    ).show()
                                 }
                             }
                         })

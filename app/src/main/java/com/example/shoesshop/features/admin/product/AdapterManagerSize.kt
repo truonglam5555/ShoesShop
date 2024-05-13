@@ -21,7 +21,7 @@ class AdapterManagerSize @Inject constructor() : BaseAdapter<String, ItemSizeBin
             if (position == selectedItemPosition) {
                 cardView.setCardBackgroundColor(
                     ContextCompat.getColor(
-                        App.getContext(),
+                        App.app.applicationContext,
                         R.color.main_color
                     )
                 )
@@ -33,5 +33,4 @@ class AdapterManagerSize @Inject constructor() : BaseAdapter<String, ItemSizeBin
             }
         }
     }
-
 }
