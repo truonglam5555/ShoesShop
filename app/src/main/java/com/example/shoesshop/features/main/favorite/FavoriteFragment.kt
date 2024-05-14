@@ -1,5 +1,6 @@
 package com.example.shoesshop.features.main.favorite
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -41,15 +42,19 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         user = FetchDataFirebase.share.getEmployeeById(idUser!!)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun refreshAdepter() {
         getUser()
+        val updatedListProduct = mutableListOf<Product>()
+
         FetchDataFirebase.share.listProduct.forEach {
             val isID = getIdlikeById(it.id)
-            if (isID != null) {
-                listProduct.add(it)
+            if (isID != null && !updatedListProduct.contains(it)) {
+                updatedListProduct.add(it)
             }
         }
-        productAdapter.submitList(listProduct)
+        listProduct.clear()
+        listProduct.addAll(updatedListProduct)
         productAdapter.notifyDataSetChanged()
     }
 
@@ -69,6 +74,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun initAdapter() {
         productAdapter = ProductAdapter()
         RecyclerViewUtils.initAdapter(
@@ -78,16 +84,20 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
             isSetScrollMiddle = false
         )
 
-        val listProduct = ArrayList<Product>()
+        val updatedListProduct = mutableListOf<Product>()
+
         FetchDataFirebase.share.listProduct.forEach {
             val isID = getIdlikeById(it.id)
-            if (isID != null) {
-                listProduct.add(it)
+            if (isID != null && !updatedListProduct.contains(it)) {
+                updatedListProduct.add(it)
             }
         }
-        //productAdapter.submitList(homeViewModel.listProductt)
+        listProduct.clear()
+        listProduct.addAll(updatedListProduct)
         productAdapter.submitList(listProduct)
         productAdapter.notifyDataSetChanged()
+
+
     }
 
     override fun initAction() {
@@ -96,7 +106,11 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     override fun initView() {
         binding.layoutFav.layoutTitleMenu2.hideView()
-
+//        if (listProduct.size > 0) {
+//            binding.notFound.hideView(false)
+//        } else {
+//            binding.notFound.hideView()
+//        }
     }
 
     private fun getIdlikeById(iDD: Int?): Int? {

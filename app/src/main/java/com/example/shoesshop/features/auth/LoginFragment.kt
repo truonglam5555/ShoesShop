@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             //
             if (binding.layoutEmail.edtEmail.text.toString().contains("admind"))
             {
-               val user = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
+                val user = FetchDataFirebase.share.getEmployeeByEmail(binding.layoutEmail.edtEmail.text.toString())
                 if (user != null && user.pass == binding.layoutPassword.edtPassword.text.toString())
                 {
                     MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, user.id!!).let {
@@ -54,19 +54,38 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     }
                 }
             }else{
-                FetchDataFirebase.share.auth.signInWithEmailAndPassword(binding.layoutEmail.edtEmail.text.toString(),binding.layoutPassword.edtPassword.text.toString()).addOnSuccessListener {
-                    if (it.user != null)
-                    {
-                        val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
-                        user!!.id?.let { value ->
-                            MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, value)
+                if (binding.layoutEmail.edtEmail.text.toString().isNullOrEmpty() ||
+                    binding.layoutPassword.edtPassword.text.toString().isNullOrEmpty()) {
+                    val toast = Toast.makeText(context, "Vui lòng kiểm tra lại Emai Và Mật Khẩu", Toast.LENGTH_SHORT)
+                    toast.show()
+                }else{
+                    FetchDataFirebase.share.auth.signInWithEmailAndPassword(
+                        binding.layoutEmail.edtEmail.text.toString(),
+                        binding.layoutPassword.edtPassword.text.toString()
+                    ).addOnSuccessListener {
+                        if (it.user != null) {
+                            val user = getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
+                            user?.id?.let { value ->
+                                MySharedPreferences.shared.putStringValue(
+                                    KeyDataFireBase.keyUser,
+                                    value
+                                )
+                            }
+                            requireActivity().finish()
+                            requireActivity().startActivity(
+                                Intent(
+                                    requireActivity(),
+                                    HomeActivity::class.java
+                                )
+                            )
                         }
-                        requireActivity().finish()
-                        requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                    }.addOnFailureListener {
+                        Log.d("Login", it.message.toString())
+                        val toast = Toast.makeText(context, "Vui lòng kiểm tra lại Emai Và Mật Khẩu", Toast.LENGTH_SHORT)
+                        toast.show()
                     }
-                }.addOnFailureListener{
-                    Log.d("Login",it.message.toString())
                 }
+
             }
 
 //            val user =  getEmployeeById(binding.layoutEmail.edtEmail.text.toString());
@@ -84,6 +103,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 //            }
         }
         //addProductTest()
+
     }
 
     private fun addAdmindData() {
