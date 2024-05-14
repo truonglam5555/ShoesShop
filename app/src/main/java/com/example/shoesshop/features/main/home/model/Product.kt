@@ -7,6 +7,7 @@ open class Product(
     val price: Double? = null,
     var isFav: Boolean = false,
     var img_list: List<Int>? = null,
+    var img_listString: List<String>? = null,
     val description: String? = "",
     val type: String? = "",
     var sizes: List<Double>? = null,

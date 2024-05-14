@@ -26,7 +26,7 @@ class FetchDataFirebase {
     var listProduct: ArrayList<Product> = ArrayList()
     var listBillOder: ArrayList<BillOder> = ArrayList()
     val database = Firebase.database
-    private val storage = Firebase.storage
+    private val storage = Firebase.storage.reference
     val auth: FirebaseAuth
     lateinit var dataUser: DatabaseReference
     lateinit var dataProduct: DatabaseReference
@@ -306,8 +306,8 @@ class FetchDataFirebase {
     }
 
     fun uploadFile(file: Uri, nameFile: String, callback: UpFileCallback) {
-        storage.getReference().child("image/" + nameFile).putFile(file).addOnSuccessListener {
-            storage.getReference().child("image/" + nameFile).downloadUrl.addOnSuccessListener {
+        storage.child("image/$nameFile").putFile(file).addOnSuccessListener {
+            storage.child("image/$nameFile").downloadUrl.addOnSuccessListener {
                 callback.onActionComplete(it)
             }.addOnFailureListener {
                 callback.onActionComplete(null, it.message)

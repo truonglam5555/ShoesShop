@@ -2,7 +2,9 @@ package com.example.shoesshop.features.admin.product
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -11,19 +13,22 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.shoesshop.base.BaseActivity
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
+import com.example.shoesshop.data.fetch.UpFileCallback
 import com.example.shoesshop.databinding.ActivityAddProductBinding
 import com.example.shoesshop.features.main.detail.adapter.AdapterSize
 import com.example.shoesshop.features.main.home.model.Product
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddProductActivity :
     BaseActivity<ActivityAddProductBinding>(ActivityAddProductBinding::inflate) {
     private val listPhoto: MutableList<String> = mutableListOf()
+    private val listPhotoUri: MutableList<Uri> = mutableListOf()
 
     lateinit var adapterPhoto: AdapterPhoto
-    private val listSize : ArrayList<Double> = ArrayList()
+    private val listSize: ArrayList<Double> = ArrayList()
     lateinit var adapterSize: AdapterSizeProductDelete
 
     companion object {
@@ -49,7 +54,8 @@ class AddProductActivity :
         adapterPhoto.init(listPhoto)
         adapterPhoto.subjectAddImg = {
             val intent =
-                Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
             startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
         }
 
@@ -67,9 +73,8 @@ class AddProductActivity :
         }
     }
 
-    private fun resetAdapterSize()
-    {
-        binding.recyclerView.adapter = adapterSize.apply {
+    private fun resetAdapterSize() {
+        binding.recyclerViewSize .adapter = adapterSize.apply {
             this.data = listSize.map { it }.toMutableList()
         }
         adapterSize.sizeRemove = {
@@ -97,21 +102,47 @@ class AddProductActivity :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && data != null) {
-            val uri = data.data
+        if ( resultCode == RESULT_OK) {
+            when(requestCode)
+            {
+                REQUEST_CODE_PICK_IMAGE -> {
+                    val imageUri = data?.data
+                    imageUri?.let {
+                        listPhotoUri.add(it)
+                        listPhoto.add(it.path!!)
+                        setUpRecyclerPhoto()
+                    }
+                }
+            }
 
         }
     }
 
-
     fun setLietener() {
         binding.btnAddProductDone.setOnClickListener {
+
             if (binding.edtProduct.editText!!.text.toString().isNotEmpty() &&
                 binding.edtProductType.editText!!.text.isNotEmpty() &&
                 binding.edtDiscription.editText!!.text.toString()
                     .isNotEmpty() && binding.edtPrice.editText!!.text.toString().isNotEmpty()
                 && listSize.isNotEmpty()
             ) {
+
+                val listImages : ArrayList<String> = ArrayList()
+
+                listPhotoUri.forEach {
+                    FetchDataFirebase.share.uploadFile(it,FetchDataFirebase.share.dataUser.push().key!!,object :UpFileCallback{
+                        override fun onActionComplete(url: Uri?, message: String?) {
+                            if (url != null)
+                            {
+                                listImages.add(url.path!!);
+                            }else{
+                                Log.d("AAAA", message.toString())
+                            }
+                        }
+                    },)
+                }
+
                 val item = Product(
                     id = FetchDataFirebase.share.listProduct.size,
                     name = binding.edtProduct.editText!!.text.toString(),
@@ -121,7 +152,8 @@ class AddProductActivity :
                     description = binding.edtDiscription.editText!!.text.toString(),
                     isBestSeller = false,
                     type = binding.edtProductType.editText!!.text.toString(),
-                    sizes = listSize
+                    sizes = listSize,
+                    img_listString = listImages
                 )
                 FetchDataFirebase.share.addProduct(item, object : ActionCallback {
                     override fun onActionComplete(isSuccess: Boolean) {
