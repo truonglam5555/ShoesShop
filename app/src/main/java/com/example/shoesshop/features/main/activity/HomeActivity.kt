@@ -1,9 +1,12 @@
 package com.example.shoesshop.features.main.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
@@ -19,6 +22,8 @@ import com.example.shoesshop.features.main.cart.CartFragment
 import com.example.shoesshop.features.main.favorite.FavoriteFragment
 import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.notification.NotificationFragment
+import com.example.shoesshop.features.main.orders.OrderActivity
+import com.example.shoesshop.features.main.profile.ProfileActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -81,6 +86,11 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 tvTabNotifi.text = getString(R.string.tv_notification)
                 icMessage.setImageResource(R.drawable.ic_notification_unchecked)
             }
+            //header
+            val headerView = navView.getHeaderView(0)
+            val headerTitle = headerView.findViewById<TextView>(R.id.tv_name)
+            val headerImage = headerView.findViewById<ImageView>(R.id.ic_avatar)
+            headerTitle.text = "XXXX"
         }
     }
 
@@ -160,8 +170,8 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
-            R.id.user -> onStartActivity(R.id.user)
-            R.id.order -> onStartActivity(R.id.order)
+            R.id.user -> onStartActivity(ProfileActivity())
+            R.id.order -> onStartActivity(OrderActivity())
 //            R.id.setting -> onStartActivity(R.id.setting)
             R.id.sign_out -> onLogoutAccount()
         }
@@ -170,16 +180,15 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     private fun onLogoutAccount() {
-        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser,"").let {
+        MySharedPreferences.shared.putStringValue(KeyDataFireBase.keyUser, "").let {
             val intent = Intent(this@HomeActivity, AuthActivity::class.java)
             startActivity(intent)
             finish()
         }
     }
 
-    private fun onStartActivity(viewId: Int) {
-        val intent = Intent(this@HomeActivity, DetailActivity::class.java)
-        intent.putExtra(REPLACE_DRAWER, viewId)
+    private fun onStartActivity(activity: Activity) {
+        val intent = Intent(this@HomeActivity, activity::class.java)
         startActivity(intent)
     }
 }

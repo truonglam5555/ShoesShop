@@ -46,14 +46,12 @@
 
 
         <ImageView
-            android:visibility="invisible"
             android:id="@+id/ic_message"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:layout_gravity="end|center"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:importantForAccessibility="no"
             android:src="@drawable/check" />
     </LinearLayout>
 

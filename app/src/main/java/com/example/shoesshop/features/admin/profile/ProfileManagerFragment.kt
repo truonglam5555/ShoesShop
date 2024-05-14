@@ -29,7 +29,7 @@ class ProfileManagerFragment : BaseFragment<FragmentProfileManagerBinding>() {
         }
         adapterUserManager.onClickItem = {
             val intent = Intent(requireContext(), DetailUserManagerActivity::class.java)
-            intent.putExtra("idProduct", it)
+            intent.putExtra("idUser", it)
             startActivity(intent)
         }
     }

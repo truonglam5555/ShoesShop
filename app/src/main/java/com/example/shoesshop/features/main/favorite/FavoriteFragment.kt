@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.example.shoesshop.R
 import com.example.shoesshop.databinding.FragmentFavoriteBinding
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.data.fetch.FetchDataFirebase
@@ -12,15 +11,11 @@ import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.datastore.MySharedPreferences
 import com.example.shoesshop.features.main.activity.DetailActivity
 import com.example.shoesshop.features.main.activity.HomeActivity
-import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.home.adapter.ProductAdapter
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.Employee
-import com.example.shoesshop.utils.ImageUtils.setImage
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
-import com.example.shoesshop.utils.ViewUtils.navigateTo
-import com.example.shoesshop.utils.ViewUtils.showView
 
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     override val _binding: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFavoriteBinding

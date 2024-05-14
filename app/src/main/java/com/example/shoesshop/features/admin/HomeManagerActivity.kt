@@ -1,9 +1,6 @@
 package com.example.shoesshop.features.admin
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.view.MenuItem
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.example.shoesshop.NoScrollViewPagerAdapter
@@ -15,11 +12,6 @@ import com.example.shoesshop.features.admin.home.HomeManagerFragment
 import com.example.shoesshop.features.admin.orders.OrdersManagerFragment
 import com.example.shoesshop.features.admin.product.ProductManagerFragment
 import com.example.shoesshop.features.admin.profile.ProfileManagerFragment
-import com.example.shoesshop.features.main.activity.DetailActivity
-import com.example.shoesshop.features.main.cart.CartFragment
-import com.example.shoesshop.features.main.favorite.FavoriteFragment
-import com.example.shoesshop.features.main.home.HomeFragment
-import com.example.shoesshop.features.main.notification.NotificationFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

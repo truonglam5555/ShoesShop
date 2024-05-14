@@ -4,10 +4,8 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
 import com.example.shoesshop.constants.RecyclerValue
 import com.example.shoesshop.data.fetch.FetchDataFirebase
@@ -18,13 +16,11 @@ import com.example.shoesshop.features.main.activity.DetailActivity
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.home.adapter.CategoryAdapter
 import com.example.shoesshop.features.main.home.adapter.ProductAdapter
-import com.example.shoesshop.features.main.home.model.Category
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.model.Employee
 import com.example.shoesshop.utils.RecyclerViewUtils
 import com.example.shoesshop.utils.ViewUtils.hideView
-import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -89,7 +85,6 @@ companion object{
             intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
             startActivity(intent)
 
-//            requireView().navigateTo(R.id.action_homeFragment_to_productDetailFragment)
         }
         productAdapter.onItemAddToCartClick = {
             val product = it;

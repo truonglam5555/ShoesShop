@@ -9,25 +9,23 @@ import com.example.shoesshop.model.ProductManager
 class DetailProductManagerActivity :
     BaseActivity<ActivityDetailProductManagerBinding>(ActivityDetailProductManagerBinding::inflate) {
 
-        var idProduct : Int = -1
+    var idProduct: Int = -1
     val adapterSize: AdapterSizeProduct = AdapterSizeProduct()
-    lateinit var adapterImage : Adapterphotodetail
+    lateinit var adapterImage: Adapterphotodetail
     lateinit var product: Product
     override fun onCreateView() {
         super.onCreateView()
         adapterImage = Adapterphotodetail(this)
-        idProduct =  intent.getIntExtra("idProduct",-1)
-        if (idProduct >= 0)
-        {
-            product =  FetchDataFirebase.share.getProductByID(idProduct)!!
+        idProduct = intent.getIntExtra("idProduct", -1)
+        if (idProduct >= 0) {
+            product = FetchDataFirebase.share.getProductByID(idProduct)!!
             setListener()
-            setFeild()
+            setField()
             setAdapter()
         }
     }
 
-    private fun setAdapter()
-    {
+    private fun setAdapter() {
         val listData = mutableListOf<Double>()
         product.sizes?.forEach {
             listData.add(it)
@@ -36,8 +34,7 @@ class DetailProductManagerActivity :
 
         binding.apply {
             recyclerViewPhto.adapter = adapterImage.apply {
-                if (product.img_listString != null )
-                {
+                if (product.img_listString != null) {
                     this.data = product.img_listString!!.toMutableList()
                 }
             }
@@ -47,19 +44,16 @@ class DetailProductManagerActivity :
         }
     }
 
-    private fun setFeild()
-    {
+    private fun setField() {
 
-
-            binding.etNamePro.setText(product.name)
-            binding.etTypePro.setText(product.type)
-            binding.etDisPro.setText(product.description)
-            binding.etPrice.setText(product.price.toString())
+        binding.etNamePro.setText(product.name)
+        binding.etTypePro.setText(product.type)
+        binding.etDisPro.setText(product.description)
+        binding.etPrice.setText(product.price.toString())
 
     }
 
-    private fun setListener()
-    {
+    private fun setListener() {
         binding.btnBack.setOnClickListener {
             this.finish()
         }

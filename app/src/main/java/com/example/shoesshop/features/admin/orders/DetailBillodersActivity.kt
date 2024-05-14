@@ -94,7 +94,6 @@ class DetailBillodersActivity : BaseActivity<ActivityDetailBillodersBinding>(Act
     }
 
 
-
     private fun setFiled()
     {
         if (idBill != null)
