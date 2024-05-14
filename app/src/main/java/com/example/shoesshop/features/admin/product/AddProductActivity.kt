@@ -2,6 +2,8 @@ package com.example.shoesshop.features.admin.product
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -24,7 +26,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AddProductActivity :
     BaseActivity<ActivityAddProductBinding>(ActivityAddProductBinding::inflate) {
-    private val listPhoto: MutableList<String> = mutableListOf()
+    private val listPhoto: MutableList<Bitmap> = mutableListOf()
     private val listPhotoUri: MutableList<Uri> = mutableListOf()
 
     lateinit var adapterPhoto: AdapterPhoto
@@ -49,14 +51,13 @@ class AddProductActivity :
     }
 
     private fun setUpRecyclerPhoto() {
+
+
         binding.recyclerView.adapter = adapterPhoto
-        listPhoto.add("https://firebasestorage.googleapis.com/v0/b/theme-pack-android.appspot.com/o/Label%2Fgallery%2F1.1.png?alt=media&token=9d12831e-a6be-42ab-bdfe-eb7b189eea95")
+        //listPhoto.add("https://firebasestorage.googleapis.com/v0/b/theme-pack-android.appspot.com/o/Label%2Fgallery%2F1.1.png?alt=media&token=9d12831e-a6be-42ab-bdfe-eb7b189eea95")
         adapterPhoto.init(listPhoto)
         adapterPhoto.subjectAddImg = {
-            val intent =
-                Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
+
         }
 
 //        adapterPhoto.subjectCallBackChoosePosition = { position ->
@@ -109,8 +110,9 @@ class AddProductActivity :
                     val imageUri = data?.data
                     imageUri?.let {
                         listPhotoUri.add(it)
-                        listPhoto.add(it.path!!)
-                        setUpRecyclerPhoto()
+                        val inputStream = contentResolver.openInputStream(it)
+                        listPhoto.add(BitmapFactory.decodeStream(inputStream))
+                        adapterPhoto.init(listPhoto)
                     }
                 }
             }
@@ -119,6 +121,13 @@ class AddProductActivity :
     }
 
     fun setLietener() {
+
+        binding.btnAddImage.setOnClickListener {
+                    val intent =
+            Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE)
+        }
         binding.btnAddProductDone.setOnClickListener {
 
             if (binding.edtProduct.editText!!.text.toString().isNotEmpty() &&
@@ -135,36 +144,38 @@ class AddProductActivity :
                         override fun onActionComplete(url: Uri?, message: String?) {
                             if (url != null)
                             {
-                                listImages.add(url.path!!);
+                                listImages.add(url.toString())
+                                if (listImages.size == listPhotoUri.size)
+                                {
+                                    val item = Product(
+                                        id = FetchDataFirebase.share.listProduct.last().id +1,
+                                        name = binding.edtProduct.editText!!.text.toString(),
+                                        image = "",
+                                        price = binding.edtPrice.editText!!.text.toString().toDouble(),
+                                        isFav = false,
+                                        description = binding.edtDiscription.editText!!.text.toString(),
+                                        isBestSeller = false,
+                                        type = binding.edtProductType.editText!!.text.toString(),
+                                        sizes = listSize,
+                                        img_listString = listImages
+                                    )
+                                    FetchDataFirebase.share.addProduct(item, object : ActionCallback {
+                                        override fun onActionComplete(isSuccess: Boolean) {
+                                            if (isSuccess) {
+                                                setResult(101)
+                                                this@AddProductActivity.finish()
+                                            } else {
+
+                                            }
+                                        }
+                                    })
+                                }
                             }else{
                                 Log.d("AAAA", message.toString())
                             }
                         }
                     },)
                 }
-
-                val item = Product(
-                    id = FetchDataFirebase.share.listProduct.size,
-                    name = binding.edtProduct.editText!!.text.toString(),
-                    image = "",
-                    price = binding.edtPrice.editText!!.text.toString().toDouble(),
-                    isFav = false,
-                    description = binding.edtDiscription.editText!!.text.toString(),
-                    isBestSeller = false,
-                    type = binding.edtProductType.editText!!.text.toString(),
-                    sizes = listSize,
-                    img_listString = listImages
-                )
-                FetchDataFirebase.share.addProduct(item, object : ActionCallback {
-                    override fun onActionComplete(isSuccess: Boolean) {
-                        if (isSuccess) {
-                            setResult(101)
-                            this@AddProductActivity.finish()
-                        } else {
-
-                        }
-                    }
-                })
             }
         }
         binding.btnAddSize.setOnClickListener {

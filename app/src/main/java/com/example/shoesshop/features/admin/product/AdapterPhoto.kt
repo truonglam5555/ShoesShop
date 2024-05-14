@@ -2,6 +2,7 @@ package com.example.shoesshop.features.admin.product
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,39 +24,69 @@ class AdapterPhoto(val context:Context) :
     var subjectCallBackChoosePosition: ((position: Int) -> Unit)? = null
     private val VIEW_TYPE_IMAGE = 1
     private val VIEW_TYPE_DEFAULT_ICON = 2
-    private var listImg: MutableList<String> = mutableListOf()
+    private var listImg: MutableList<Bitmap> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun init(list: MutableList<String>) {
+    fun init(list: MutableList<Bitmap>) {
         listImg.clear()
         listImg.addAll(list)
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            VIEW_TYPE_IMAGE -> {
-                val view =
+        val view =
                     LayoutInflater.from(context)
                         .inflate(R.layout.item_photo, parent, false)
-                ImageViewHolder(view)
-            }
 
-            VIEW_TYPE_DEFAULT_ICON -> {
-                val view =
-                    LayoutInflater.from(context)
-                        .inflate(R.layout.item_default, parent, false)
-                DefaultIconViewHolder(view)
-            }
-
-            else -> throw IllegalArgumentException("Invalid view type")
-        }
+        return  ImageViewHolder(view)
+//        return when (viewType) {
+//            VIEW_TYPE_IMAGE -> {
+//                val view =
+//                    LayoutInflater.from(context)
+//                        .inflate(R.layout.item_photo, parent, false)
+//                ImageViewHolder(view)
+//            }
+//
+//            VIEW_TYPE_DEFAULT_ICON -> {
+//                val view =
+//                    LayoutInflater.from(context)
+//                        .inflate(R.layout.item_default, parent, false)
+//                DefaultIconViewHolder(view)
+//            }
+//
+//            else -> throw IllegalArgumentException("Invalid view type")
+//        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder.itemViewType) {
-            VIEW_TYPE_IMAGE -> {
-                val imageHolder = holder as ImageViewHolder
+//        when (holder.itemViewType) {
+//            VIEW_TYPE_IMAGE -> {
+//                val imageHolder = holder as ImageViewHolder
+//                if (listImg.size >= 1) {
+////                    Glide.with(context)
+////                        .load(listImg[position])
+////                        .into(imageHolder.imageCenter)
+//                    setRoundedCornerImage(imageHolder.imageCenter, listImg[position])
+//
+//                    imageHolder.imageCenter.clickWithAnimationDebounce {
+//                        subjectCallBackChoosePosition?.invoke(position)
+//                    }
+//
+//                    imageHolder.imgClose.clickWithAnimationDebounce {
+//                        subjectCallBackDeletePosition?.invoke(position)
+//                    }
+//                }
+//            }
+//
+//            VIEW_TYPE_DEFAULT_ICON -> {
+//                val iconHolder = holder as DefaultIconViewHolder
+//                iconHolder.imageAdd.clickWithAnimationDebounce {
+//                    subjectAddImg?.invoke(0)
+//                }
+//            }
+//        }
+
+        val imageHolder = holder as ImageViewHolder
                 if (listImg.size >= 1) {
 //                    Glide.with(context)
 //                        .load(listImg[position])
@@ -70,15 +101,6 @@ class AdapterPhoto(val context:Context) :
                         subjectCallBackDeletePosition?.invoke(position)
                     }
                 }
-            }
-
-            VIEW_TYPE_DEFAULT_ICON -> {
-                val iconHolder = holder as DefaultIconViewHolder
-                iconHolder.imageAdd.clickWithAnimationDebounce {
-                    subjectAddImg?.invoke(0)
-                }
-            }
-        }
     }
 
     override fun getItemCount(): Int {
@@ -93,7 +115,7 @@ class AdapterPhoto(val context:Context) :
         }
     }
 
-    private fun setRoundedCornerImage(imageView: ImageView, imageUrl: String) {
+    private fun setRoundedCornerImage(imageView: ImageView, imageUrl: Bitmap) {
         val radius = 10
         val requestOptions = RequestOptions().transform(RoundedCorners(radius))
 

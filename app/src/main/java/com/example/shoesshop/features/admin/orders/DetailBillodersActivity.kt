@@ -145,7 +145,7 @@ class DetailBillodersActivity : BaseActivity<ActivityDetailBillodersBinding>(Act
     override fun onActionComplete(isSuccess: Boolean) {
         if (isSuccess)
         {
-            setResult(RESULT_OK)
+            setResult(100)
             this@DetailBillodersActivity.finish()
         }else{
             Toast.makeText(this@DetailBillodersActivity,"Upgrade Fail!",Toast.LENGTH_LONG).show()

@@ -157,6 +157,25 @@
                 android:textColorHint="@color/gray" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/btn_add_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_weight="1"
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_size_delete"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewSize"
             android:layout_width="match_parent"
@@ -166,15 +185,6 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_size_delete"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </LinearLayout>
 

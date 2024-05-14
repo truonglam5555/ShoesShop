@@ -11,9 +11,11 @@ class DetailProductManagerActivity :
 
         var idProduct : Int = -1
     val adapterSize: AdapterSizeProduct = AdapterSizeProduct()
+    lateinit var adapterImage : Adapterphotodetail
     lateinit var product: Product
     override fun onCreateView() {
         super.onCreateView()
+        adapterImage = Adapterphotodetail(this)
         idProduct =  intent.getIntExtra("idProduct",-1)
         if (idProduct >= 0)
         {
@@ -22,7 +24,6 @@ class DetailProductManagerActivity :
             setFeild()
             setAdapter()
         }
-
     }
 
     private fun setAdapter()
@@ -31,7 +32,15 @@ class DetailProductManagerActivity :
         product.sizes?.forEach {
             listData.add(it)
         }
+
+
         binding.apply {
+            recyclerViewPhto.adapter = adapterImage.apply {
+                if (product.img_listString != null )
+                {
+                    this.data = product.img_listString!!.toMutableList()
+                }
+            }
             recyclerView.adapter = adapterSize.apply {
                 this.data = listData
             }

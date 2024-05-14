@@ -137,7 +137,7 @@ class HomeManagerActivity :
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK)
+        if (resultCode == 100)
         {
             frmHome.resetCount()
             frmOrders.resetAdapter()
