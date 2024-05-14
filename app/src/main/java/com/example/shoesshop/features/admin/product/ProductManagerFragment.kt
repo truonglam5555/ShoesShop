@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
+class ProductManagerFragment  : BaseFragment<FragmentProductManagerBinding>() {
 
     @Inject
     lateinit var adapterProductManager: AdapterProductManager
@@ -28,6 +28,7 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
     }
 
     override fun initAction() {
+        adapterProductManager.context = this.requireContext()
         adapterProductManager.subjectRemove ={
             val item = FetchDataFirebase.share.getProductByID(it.idPro)
            FetchDataFirebase.share.deleteProducts(item = item!!,object :ActionCallback{
@@ -74,7 +75,7 @@ class ProductManagerFragment : BaseFragment<FragmentProductManagerBinding>() {
     private fun listProduct(): MutableList<ProductManager> {
         val listData = mutableListOf<ProductManager>()
         FetchDataFirebase.share.listProduct.forEach {
-            listData.add(ProductManager(it.id,it.name!!, if (it.image != null)  it.image!! else "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png" ,it.price!!))
+            listData.add(ProductManager(it.id,it.name!!, if (!it.img_listString.isNullOrEmpty())  it.img_listString!!.first() else "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/ca79d356-421f-4a96-a823-b695f15c7a34/in-season-tr-13-workout-shoes-BDTlPf.png" ,it.price!!))
         }
         return listData
     }

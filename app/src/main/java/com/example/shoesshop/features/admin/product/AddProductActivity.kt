@@ -138,7 +138,6 @@ class AddProductActivity :
             ) {
 
                 val listImages : ArrayList<String> = ArrayList()
-
                 listPhotoUri.forEach {
                     FetchDataFirebase.share.uploadFile(it,FetchDataFirebase.share.dataUser.push().key!!,object :UpFileCallback{
                         override fun onActionComplete(url: Uri?, message: String?) {
@@ -148,7 +147,7 @@ class AddProductActivity :
                                 if (listImages.size == listPhotoUri.size)
                                 {
                                     val item = Product(
-                                        id = FetchDataFirebase.share.listProduct.last().id +1,
+                                        id = if (FetchDataFirebase.share.listProduct.size > 0 )  FetchDataFirebase.share.listProduct.last().id +1 else 0,
                                         name = binding.edtProduct.editText!!.text.toString(),
                                         image = "",
                                         price = binding.edtPrice.editText!!.text.toString().toDouble(),
@@ -181,11 +180,9 @@ class AddProductActivity :
         binding.btnAddSize.setOnClickListener {
             if (binding.edtSize.editText!!.text.toString().isNotEmpty() && binding.edtSize.editText!!.text.toString().length >= 2)
             {
-
                 listSize.add(binding.edtSize.editText!!.text.toString().toDouble())
                 binding.edtSize.editText!!.setText("")
                 resetAdapterSize()
-
             }
         }
     }
