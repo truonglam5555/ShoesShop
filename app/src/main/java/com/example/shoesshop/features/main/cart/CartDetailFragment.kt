@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
@@ -131,19 +132,34 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
     private fun showDialogAddress() {
         val dialog = showDialogCommon(R.layout.dialog_add_address)
         val btConfirm: Button = dialog.findViewById(R.id.bt_confirm)
+        val edtAdress: EditText = dialog.findViewById(R.id.edt_adress)
+
         btConfirm.clickWithAnimationDebounce {
-            // XU LI TRONG NAY
+            val newAddress = edtAdress.text.toString()
+            updatePhone(newAddress)
+            dialog.dismiss()
+
         }
         dialog.show()
     }
 
+
     private fun showDialogPhone() {
         val dialog = showDialogCommon(R.layout.dialog_add_number)
         val btConfirm: Button = dialog.findViewById(R.id.bt_confirm)
+        val etPhoneNumber: EditText = dialog.findViewById(R.id.edt_number)
         btConfirm.clickWithAnimationDebounce {
-            // XU LI TRONG NAY
+            val newPhoneNumber = etPhoneNumber.text.toString()
+            updateAddress(newPhoneNumber)
+            dialog.dismiss()
         }
         dialog.show()
+    }
+    private fun updatePhone(newName: String) {
+        binding.layoutNumber.tvInfoType.text = newName
+    }
+    private fun updateAddress(newName: String) {
+        binding.tvInfoType.text = newName
     }
 
     override fun initView() {

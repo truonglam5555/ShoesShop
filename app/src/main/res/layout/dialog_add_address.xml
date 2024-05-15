@@ -25,7 +25,7 @@
             android:textSize="@dimen/_14ssp" />
 
         <EditText
-            android:id="@+id/edt_number"
+            android:id="@+id/edt_adress"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginHorizontal="@dimen/_30sdp" />
