@@ -1,8 +1,16 @@
 package com.example.shoesshop.features.main.cart
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseFragment
@@ -30,8 +38,11 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
     override fun onViewCreated() {
         binding.layoutNumber.icInfo.setImageResource(R.drawable.ic_call_phone)
         binding.layoutNumber.tvInfoName.text = "Phone"
+        setListProduct()
+    }
 
-        binding.layoutNumber.tvInfoName.text = "Phone"
+    private fun setListProduct() {
+        // set list product here
     }
 
     fun getUserAndData() {
@@ -60,16 +71,15 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
 
     override fun initAction() {
         binding.layoutNumber.icEdit.clickWithAnimationDebounce {
-//            inputPhone()
+            showDialogPhone()
         }
-        binding.icEdit.clickWithAnimationDebounce {
-//            inputAdress()
+        binding.icEditAddress.clickWithAnimationDebounce {
+            showDialogAddress()
         }
         val popupSuccess = BasePopupSuccessFragment(
             title = getString(R.string.text_your_payment_is_successful),
             btText = getString(R.string.text_back_to_shopping)
         )
-
 
         binding.layoutBottomCheckout.btCheckOut.setOnClickListener {
             val user = FetchDataFirebase.share.getCurrentUser()
@@ -97,7 +107,12 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
                                     popupSuccess.show(childFragmentManager, "")
 
                                     popupSuccess.onCallback = {
-                                        requireActivity().startActivity(Intent(requireActivity(), HomeActivity::class.java))
+                                        requireActivity().startActivity(
+                                            Intent(
+                                                requireActivity(),
+                                                HomeActivity::class.java
+                                            )
+                                        )
                                     }
                                 }
                             }
@@ -113,11 +128,48 @@ class CartDetailFragment : BaseFragment<FragmentCartDetailBinding>() {
         }
     }
 
+    private fun showDialogAddress() {
+        val dialog = showDialogCommon(R.layout.dialog_add_address)
+        val btConfirm: Button = dialog.findViewById(R.id.bt_confirm)
+        btConfirm.clickWithAnimationDebounce {
+            // XU LI TRONG NAY
+        }
+        dialog.show()
+    }
+
+    private fun showDialogPhone() {
+        val dialog = showDialogCommon(R.layout.dialog_add_number)
+        val btConfirm: Button = dialog.findViewById(R.id.bt_confirm)
+        btConfirm.clickWithAnimationDebounce {
+            // XU LI TRONG NAY
+        }
+        dialog.show()
+    }
+
     override fun initView() {
         getUserAndData()
         binding.layoutHeader.tvTitle.text = getString(R.string.text_my_cart)
         binding.layoutBottomCheckout.tvSubtotal.text = "$$total"
         binding.layoutBottomCheckout.tvDelivery.text = "$$shipCod"
         binding.layoutBottomCheckout.tvTotalCost.text = "$" + (total + shipCod)
+    }
+
+    private fun showDialogCommon(idLayoutDialog: Int): Dialog {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(idLayoutDialog)
+        val window: Window? = dialog.window?.apply {
+            setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        val windowAttributes = window?.attributes
+        if (windowAttributes != null) {
+            windowAttributes.gravity = Gravity.CENTER
+        }
+        dialog.show()
+        return dialog
     }
 }

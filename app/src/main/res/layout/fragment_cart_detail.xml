@@ -69,7 +69,7 @@
                     android:id="@+id/tv_info_name"
                     app:layout_constraintStart_toEndOf="@id/ic_info"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/ic_edit"
+                    app:layout_constraintEnd_toStartOf="@id/ic_edit_address"
                     android:textSize="@dimen/text_size_12"
                     android:layout_marginStart="@dimen/spacing_10"
                     android:layout_marginEnd="@dimen/spacing_10"
@@ -88,7 +88,7 @@
                     android:textAlignment="textStart"
                     android:layout_marginEnd="@dimen/spacing_10"
                     android:textSize="@dimen/text_size_12"
-                    app:layout_constraintEnd_toStartOf="@id/ic_edit"
+                    app:layout_constraintEnd_toStartOf="@id/ic_edit_address"
                     android:layout_marginStart="@dimen/spacing_10"
                     style="@style/TextLayoutDescriptionStyleMedium"
                     />
@@ -96,7 +96,8 @@
                 <ImageView
                     android:layout_width="@dimen/button_size_16"
                     android:layout_height="@dimen/button_size_16"
-                    android:id="@+id/ic_edit"
+                    android:id="@+id/ic_edit_address"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:src="@drawable/ic_edit"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -112,6 +113,57 @@
             <include
                 android:id="@+id/layout_payment"
                 layout="@layout/layout_payment" />
+
+            <LinearLayout
+                android:id="@+id/ln_layout"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:padding="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:background="@drawable/cart_background_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:text="Items"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_14sdp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_width="wrap_content"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+                    <androidx.cardview.widget.CardView
+                        app:cardCornerRadius="@dimen/_30sdp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#E7F3F9"
+                        app:contentPaddingLeft="@dimen/_10sdp"
+                        app:contentPaddingRight="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_count_product"
+                            android:layout_marginStart="@dimen/_1sdp"
+                            android:text="2"
+                            android:layout_gravity="center"
+                            android:textColor="#1483C2"
+                            android:textSize="@dimen/_8sdp"
+                            android:fontFamily="@font/inter"
+                            android:layout_width="wrap_content"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_height="wrap_content"/>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/recyclerView"
+                    tools:listitem="@layout/item_bill_product"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -16,6 +16,7 @@
     <string name="tv_select_category">Select Category</string>
     <string name="tv_popular_shoes">Popular Shoes</string>
     <string name="tv_see_all">See all</string>
+    <string name="tv_edit_user">Edit User</string>
 
 
     <!-- OnBoarding -->
@@ -140,5 +141,8 @@
     <string name="text_search">Search</string>
     <string name="text_read_more">Read More</string>
     <string name="text_sneaker_shop">Sneaker Shop</string>
+    <string name="tv_confirm">Confirm</string>
+    <string name="tv_input_your_number">Input your number</string>
+    <string name="tv_input_your_address">Input your address</string>
 
 </resources>
