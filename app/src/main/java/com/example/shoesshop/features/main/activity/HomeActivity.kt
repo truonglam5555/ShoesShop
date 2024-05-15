@@ -14,6 +14,7 @@ import com.example.shoesshop.NoScrollViewPagerAdapter
 import com.example.shoesshop.R
 import com.example.shoesshop.base.BaseActivity
 import com.example.shoesshop.common.extension.clickWithAnimationDebounce
+import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.data.fetch.KeyDataFireBase
 import com.example.shoesshop.databinding.ActivityMainBinding
 import com.example.shoesshop.datastore.MySharedPreferences
@@ -24,6 +25,8 @@ import com.example.shoesshop.features.main.home.HomeFragment
 import com.example.shoesshop.features.main.notification.NotificationFragment
 import com.example.shoesshop.features.main.orders.OrderActivity
 import com.example.shoesshop.features.main.profile.ProfileActivity
+import com.example.shoesshop.model.Employee
+import com.example.shoesshop.utils.ImageUtils.setImage
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -90,7 +93,20 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             val headerView = navView.getHeaderView(0)
             val headerTitle = headerView.findViewById<TextView>(R.id.tv_name)
             val headerImage = headerView.findViewById<ImageView>(R.id.ic_avatar)
-            headerTitle.text = "XXXX"
+//            val user = getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
+//            user?.id?.let { value ->
+//                MySharedPreferences.shared.putStringValue(
+//                    KeyDataFireBase.keyUser,
+//                    value
+//                )
+//            }
+            val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
+            FetchDataFirebase.share.listUser.forEach {
+                if(it.id == idUser){
+                    headerTitle.text = it.fullName
+                    headerImage.setImage(it.pathImage)
+                }
+            }
         }
     }
 
@@ -191,4 +207,12 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val intent = Intent(this@HomeActivity, activity::class.java)
         startActivity(intent)
     }
+//    private fun getEmployeeById(id: String): Employee? {
+//        for (employee in FetchDataFirebase.share.listUser) {
+//            if (employee.email == id) {
+//                return employee
+//            }
+//        }
+//        return null // If no employee found with the given Email
+//    }
 }
