@@ -93,13 +93,6 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             val headerView = navView.getHeaderView(0)
             val headerTitle = headerView.findViewById<TextView>(R.id.tv_name)
             val headerImage = headerView.findViewById<ImageView>(R.id.ic_avatar)
-//            val user = getEmployeeById(binding.layoutEmail.edtEmail.text.toString())
-//            user?.id?.let { value ->
-//                MySharedPreferences.shared.putStringValue(
-//                    KeyDataFireBase.keyUser,
-//                    value
-//                )
-//            }
             val idUser = MySharedPreferences.shared.pullStringValue(KeyDataFireBase.keyUser)
             FetchDataFirebase.share.listUser.forEach {
                 if(it.id == idUser){
@@ -207,12 +200,4 @@ class HomeActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         val intent = Intent(this@HomeActivity, activity::class.java)
         startActivity(intent)
     }
-//    private fun getEmployeeById(id: String): Employee? {
-//        for (employee in FetchDataFirebase.share.listUser) {
-//            if (employee.email == id) {
-//                return employee
-//            }
-//        }
-//        return null // If no employee found with the given Email
-//    }
 }

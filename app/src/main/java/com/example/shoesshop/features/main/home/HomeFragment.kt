@@ -80,10 +80,12 @@ companion object{
         }
         productAdapter.onItemClick = {
             //homeViewModel.product.value = it
-            FetchDataFirebase.share.productSelect = it
+            val itemData = FetchDataFirebase.share.productSelect
             val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra(HomeActivity.REPLACE_DRAWER, itemData)
             intent.putExtra(HomeActivity.REPLACE_DRAWER, 1)
             startActivity(intent)
+
 
         }
         productAdapter.onItemAddToCartClick = {

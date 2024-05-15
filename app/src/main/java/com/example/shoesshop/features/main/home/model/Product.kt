@@ -1,5 +1,7 @@
 package com.example.shoesshop.features.main.home.model
 
+import java.io.Serializable
+
 open class Product(
     val id: Int = 0,
     val image: String? = "",
@@ -12,4 +14,4 @@ open class Product(
     val type: String? = "",
     var sizes: List<Double>? = null,
     val isBestSeller: Boolean? = false,
-)
+): Serializable

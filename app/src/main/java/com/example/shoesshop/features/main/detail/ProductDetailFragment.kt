@@ -5,22 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shoesshop.base.BaseFragment
-import com.example.shoesshop.constants.RecyclerValue
 import com.example.shoesshop.data.fetch.ActionCallback
 import com.example.shoesshop.data.fetch.FetchDataFirebase
 import com.example.shoesshop.databinding.FragmentProductDetailBinding
 import com.example.shoesshop.features.main.activity.HomeActivity
 import com.example.shoesshop.features.main.detail.adapter.AdapterSize
-import com.example.shoesshop.features.main.detail.adapter.ChooseColorProductAdapter
 import com.example.shoesshop.features.main.home.model.Product
 import com.example.shoesshop.model.CardUser
 import com.example.shoesshop.utils.ImageUtils.setImage
-import com.example.shoesshop.utils.RecyclerViewUtils
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
@@ -34,11 +28,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 //    private lateinit var chooseColorProductAdapter: ChooseColorProductAdapter
 
     override fun onViewCreated() {
+
         adapterSize = AdapterSize(requireContext())
 //        initAdapter()
 //        click()
         binding.layoutChooseColor.layoutTitleMenu2.visibility = View.GONE
-
         if (FetchDataFirebase.share.productSelect != null) {
             setProduct(FetchDataFirebase.share.productSelect!!)
             adapterSize.subjectItem = {
